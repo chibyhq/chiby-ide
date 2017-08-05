@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Whatnot IDE</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="images/favicon.png"/>
+    <link rel="stylesheet" href="webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/chiby-ide.css"/>
+   <style>
+    
+  </style>
+
+ </head>
+  <body style="background: black;">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <img style="padding-top:8px" src="images/banner.png">
+        </div>
+          <div id="navbar">
+            <ul class="nav navbar-nav">
+              <li><a id="whatnot-script-action-button" href="#"><span id="whatnot-script-action-icon" class="glyphicon glyphicon-play" aria-hidden="true"></span> <span class="ladda-label" id="whatnot-script-action-label">Run</span></a></li>
+              <li><a href="#" class="whatnot-status-label">Current Status : <b><span id="whatnot-status-label">Stopped</span></b> <span id="whatnot-status-icon" class="glyphicon glyphicon-stop" aria-hidden="true"></span></a></li>
+            </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Open...</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> Save as...</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Settings</a></li>
+          </ul>
+         </div>
+      </div>
+    </nav>
+    
+  <div id="panel-program" class="container-fluid">
+        <div class="row">
+              <div class="col-sm-12" style="margin-top:40px">&nbsp;</div>
+          </div>
+        <div class="row">
+              <div class="col-sm-12 col-lg-8 main" style="padding-right:0px">
+                <iframe id="blocklyFrame" style="width:100%; height:100%;" src="frame.html"></iframe>
+              </div>
+              <div class="col-sm-12 col-lg-4">
+                 <ul class="nav nav-tabs" role="tablist" style="border-bottom:0px">
+                      <li class="active"><a href="#script-preview" role="tab" data-toggle="tab">Script preview</a></li>
+                      <li><a href="#console" role="tab" data-toggle="tab">Console</a></li>
+                    </ul>
+                    
+                 <div class="tab-content">
+                  <div class="tab-pane active" id="script-preview">
+                     <div id="whatnot-script-preview-panel" class="panel panel-default" style="border-top-left-radius: 0px;border-top-right-radius: 0px;">
+                        <div class="panel-body" style="padding:0px">
+                            <textarea readonly id="whatnot-script-preview-textarea" class="whatnot-textarea col-sm-12"></textarea>
+                         </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="console">
+                      <div class="btn-group btn-group-sm" role="group" style="padding:5px;background-color:white;width:100%;border-top-right-radius: 4px;">
+                          <a href="#"  onclick="clearConsole()" class="btn btn-default"><span class="glyphicon glyphicon-ban-circle"></span> Clear</a>
+                        </div>
+                      <div id="whatnot-console-panel" class="panel panel-default" style="border-top-left-radius: 0px;border-top-right-radius: 0px;">
+                         <div class="panel-body" style="padding:0px">
+                           <textarea readonly id="whatnot-console-textarea" class="whatnot-textarea col-sm-12"></textarea>
+                          </div>
+                      </div>
+                  </div>
+                  
+                </div>
+          </div>
+      </div>
+  </div>
+ 
+   <script src="webjars/jquery/jquery.js"></script>
+   <script src="webjars/bootstrap/js/bootstrap.min.js"></script>
+   
+   <script type="text/javascript">
+          function blocklyLoaded(blockly) {
+            // Called once Blockly is fully loaded, provides a 
+            // window-wide access toits functions.
+            //window.Blockly = blockly;
+            
+            // Enable auto-save into browser local storage
+            //window.setTimeout(BlocklyStorage.restoreBlocks, 0);
+            //BlocklyStorage.backupOnUnload();
+            
+             // Add a change listener to update the generated python script
+             // upon each code block change
+             blockly.addChangeListener(function (event){
+                 blockly.Python.INFINITE_LOOP_TRAP = null;
+                 var code = blockly.Python.workspaceToCode();
+                 $("#whatnot-script-preview-textarea").val(code);
+              });
+          }
+    </script>
+    <!--script src="js/blockly-storage.js"></script-->
+    <script type="text/javascript">
+         
+          function getWindowDimensions() { 
+                  var myWidth = 0, myHeight = 0;
+                  if( typeof( window.innerWidth ) == 'number' ) {
+                      myWidth = window.innerWidth;
+                      myHeight = window.innerHeight;
+                  }
+                  if (myWidth < 1) myWidth = screen.width; // emergency fallback to prevent division by zero
+                  if (myHeight < 1) myHeight = screen.height; 
+                  return [myWidth,myHeight];
+              }
+    
+     $(document).ready(function(){
+          var dim = getWindowDimensions();
+          // Leave space for the top navigation bar
+          $('#blocklyFrame').height((dim[1]-80) + "px");
+          // Leave space for the top navigation bar
+          $('#whatnot-console-textarea').height((dim[1]-167) + "px");
+          $('#whatnot-script-preview-textarea').height((dim[1]-127) + "px");
+          
+          
+          window.clearConsole = function(){
+            $("#whatnot-console-textarea").text("");
+          }
+
+      });
+   
+      
+    </script>  
+</body>
+</html>

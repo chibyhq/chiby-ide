@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.github.chiby.ide</groupId>
+	<artifactId>frontend</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>frontend</name>
+	<description>Web frontend for Chiby IDE</description>
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.6.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+        <base.image>resin/raspberry-pi3-alpine-openjdk:8</base.image>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>0.31</version>
+        </dependency>
+        
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+        
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.3.7-1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.1.1</version>
+        </dependency>	
+        
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>blockly</artifactId>
+             <version>0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.chiby.blockly</groupId>
+            <artifactId>blockly-pygamezero</artifactId>
+            <version>[0.1-SNAPSHOT,)</version>
+        </dependency>
+		
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>springloaded</artifactId>
+						<version>1.2.5.RELEASE</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<addResources>true</addResources>
+				</configuration>
+			</plugin>
+           <plugin>
+                <groupId>com.jamesward</groupId>
+                <artifactId>unsnapshot-maven-plugin</artifactId>
+                <version>0.2</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>unsnapshot</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.reformanda.semper</groupId>
+                <artifactId>dependencyversion-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <id>set-all</id>
+                        <goals>
+                            <goal>set-version</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <executions>
+                     <execution>
+                       <id>build-image</id>
+                       <phase>package</phase>
+                       <goals> <goal>build</goal> </goals>
+                     </execution>
+                     <execution>
+                      <id>push-image</id>
+                      <phase>deploy</phase>
+                      <goals>
+                        <goal>push</goal>
+                      </goals>
+                      <configuration>
+                        <imageName>chiby-hq/ide</imageName>
+                      </configuration>
+                    </execution>    
+                </executions>
+                <configuration>
+                    <imageName>chiby-hq/ide</imageName>
+                    <baseImage>${base.image}</baseImage>
+                    <forceTags>true</forceTags>
+                    <useConfigFile>true</useConfigFile>
+                    <imageTags>
+                       <imageTag>${project.version}</imageTag>
+                    </imageTags>
+                    <env>
+                      <IDE_HOME>/opt/chiby-ide</IDE_HOME>
+                      <IDE_LOGS>/var/log/chiby-ide</IDE_LOGS>
+                      <LANG>C.UTF-8</LANG>
+                    </env>
+                    <runs>
+                      <run>mkdir -p $IDE_HOME</run>
+                      <run>mkdir -p $IDE_LOGS</run>
+                    </runs>
+                    <workdir>$IDE_HOME</workdir>
+                    <cmd>["java","-jar","${build.finalName}"]</cmd>
+                    <exposes>
+                      <expose>8080</expose>
+                    </exposes>
+                    <volumes>
+                      <volume>$IDE_LOGS</volume>
+                    </volumes>
+                    <resources>
+                       <resource>
+                         <directory>${project.build.directory}</directory>
+                         <includes><include>${build.finalName}</include></includes>
+                         <targetPath>${IDE_HOME}</targetPath>
+                       </resource>
+                    </resources>
+                </configuration>
+              </plugin>
+		</plugins>
+	</build>
+
+
+</project>
