@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Whatnot IDE</title>
+    <title>Chiby IDE</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="images/favicon.png"/>
     <link rel="stylesheet" href="webjars/bootstrap/css/bootstrap.min.css"/>
@@ -12,7 +12,7 @@
 
  </head>
   <body style="background: black;">
-<nav class="navbar navbar-inverse navbar-fixed-top">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -78,10 +78,40 @@
    <script src="webjars/bootstrap/js/bootstrap.min.js"></script>
    
    <script type="text/javascript">
+          // This function should be integrated in the pygamezero
+          // library eventually
+          function onActorAdded(event){
+              if(event.type == Blockly.Events.CREATE
+                  && event.xml.attributes["type"].value == "actor"){
+              
+                 // Maintain a map of ACTOR to BLOCK UUID
+                 
+                 var actorName = Blockly.Variables.promptName("Please name this actor", "", function(newName){
+                         if(newName != null){
+                             Blockly.mainWorkspace.createVariable(newName);
+                             
+                         }else{
+                             // prevent the block's creation
+                         }
+                 });
+                 
+                 
+              }
+              if(event.type == Blockly.Events.CHANGE
+                  && event.element == "field"
+                  && event.name == "IMAGE"){
+               // Look up the block and find if it is an ACTOR block
+               console.log("Actor name changed", event);
+               Blockly.Variables.renameVariable(event.oldValue,event.newValue);
+               
+             }
+          }
+   
+   
           function blocklyLoaded(blockly) {
             // Called once Blockly is fully loaded, provides a 
-            // window-wide access toits functions.
-            //window.Blockly = blockly;
+            // window-wide access to its functions.
+            window.Blockly = blockly;
             
             // Enable auto-save into browser local storage
             //window.setTimeout(BlocklyStorage.restoreBlocks, 0);
@@ -89,11 +119,13 @@
             
              // Add a change listener to update the generated python script
              // upon each code block change
-             blockly.addChangeListener(function (event){
+             blockly.mainWorkspace.addChangeListener(function (event){
                  blockly.Python.INFINITE_LOOP_TRAP = null;
                  var code = blockly.Python.workspaceToCode();
                  $("#whatnot-script-preview-textarea").val(code);
               });
+             
+             blockly.mainWorkspace.addChangeListener(onActorAdded);
           }
     </script>
     <!--script src="js/blockly-storage.js"></script-->
