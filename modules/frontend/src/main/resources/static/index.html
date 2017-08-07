@@ -81,30 +81,30 @@
           // This function should be integrated in the pygamezero
           // library eventually
           function onActorAdded(event){
-              if(event.type == Blockly.Events.CREATE
-                  && event.xml.attributes["type"].value == "actor"){
-              
-                 // Maintain a map of ACTOR to BLOCK UUID
-                 
-                 var actorName = Blockly.Variables.promptName("Please name this actor", "", function(newName){
-                         if(newName != null){
-                             Blockly.mainWorkspace.createVariable(newName);
-                             
-                         }else{
-                             // prevent the block's creation
-                         }
-                 });
-                 
-                 
-              }
-              if(event.type == Blockly.Events.CHANGE
-                  && event.element == "field"
-                  && event.name == "IMAGE"){
-               // Look up the block and find if it is an ACTOR block
-               console.log("Actor name changed", event);
-               Blockly.Variables.renameVariable(event.oldValue,event.newValue);
-               
-             }
+          //   if(event.type == Blockly.Events.CREATE
+          //       && event.xml.attributes["type"].value == "actor"){
+          //   
+          //      // Maintain a map of ACTOR to BLOCK UUID
+          //      
+          //      var actorName = Blockly.Variables.promptName("Please name this actor", "", function(newName){
+          //              if(newName != null){
+          //                  var workspace = Blockly.Workspace.getById(event.workspaceId);
+          //                  workspace.createVariable(newName);
+          //              }else{
+          //                  // prevent the block's creation
+          //              }
+          //      });
+          //      
+          //      
+          //   }
+          //  if(event.type == Blockly.Events.CHANGE
+          //      && event.element == "field"
+          //      && event.name == "NAME"){
+          //   // Look up the block and find if it is an ACTOR block
+          //   console.log("Actor name changed", event);
+          //   Blockly.Variables.renameVariable(event.oldValue,event.newValue);
+          //   
+          // }
           }
    
    
