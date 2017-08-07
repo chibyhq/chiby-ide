@@ -119,11 +119,11 @@
             
              // Add a change listener to update the generated python script
              // upon each code block change
-             blockly.mainWorkspace.addChangeListener(function (event){
-                 blockly.Python.INFINITE_LOOP_TRAP = null;
-                 var code = blockly.Python.workspaceToCode();
-                 $("#whatnot-script-preview-textarea").val(code);
-              });
+            blockly.mainWorkspace.addChangeListener(function (event){
+                Blockly.Python.INFINITE_LOOP_TRAP = null;
+                var code = Blockly.Python.workspaceToCode(Blockly.Workspace.getById(event.workspaceId));
+                $("#whatnot-script-preview-textarea").val(code);
+             });
              
              blockly.mainWorkspace.addChangeListener(onActorAdded);
           }
