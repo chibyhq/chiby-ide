@@ -48,6 +48,9 @@
       <field name="PROPERTY"></field>
       <field name="ACTOR"></field>
     </block>
+    <block type="actor_colliding">
+      <field name="ACTOR">  </field>
+    </block>
     <block type="actor_position">
       <field name="ACTOR">  </field>
       <value name="POSX"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
@@ -98,16 +101,28 @@
   </category>
   <category name="Text Format" colour="#5CA65C">
     <block type="format_font_color"></block>
+    <block type="format_font_bgcolor"></block>
     <block type="format_font_size"><value name="VALUE"><shadow type="math_number"> <field name="NUM">10</field> </shadow></value></block>
     <block type="format_font_name"><value name="VALUE"><shadow type="text"><field name="TEXT"></field></shadow></value></block>
     <block type="format_text_position">
        <value name="X"><shadow type="math_number"> <field name="NUM">10</field> </shadow></value>
        <value name="Y"><shadow type="math_number"> <field name="NUM">10</field> </shadow></value>
     </block>
+    <block type="format_text_rotation"></block>
+    <block type="format_text_align"></block>
+    <block type="format_text_shadow">
+       <value name="X"><shadow type="math_number"> <field name="NUM">1.0</field> </shadow></value>
+       <value name="Y"><shadow type="math_number"> <field name="NUM">-1.0</field> </shadow></value>
+    </block>
+     
   </category>
-  <category name="Loops" colour="#5CA65C">
+  <category name="Loops and events" colour="#5CA65C">
     <block type="draw_loop"></block>
     <block type="update_loop"></block>
+    <block type="on_touch_event"></block>
+    <block type="on_drag_event"></block>
+    <block type="get_last_touch_position"></block>
+    <block type="get_last_drag_distance"></block>
     <block type="controls_repeat_ext">
       <value name="TIMES">
         <shadow type="math_number">
