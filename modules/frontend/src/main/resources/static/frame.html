@@ -114,15 +114,26 @@
        <value name="X"><shadow type="math_number"> <field name="NUM">1.0</field> </shadow></value>
        <value name="Y"><shadow type="math_number"> <field name="NUM">-1.0</field> </shadow></value>
     </block>
-     
   </category>
-  <category name="Loops and events" colour="#5CA65C">
+  
+  <category name="Pygamezero Loops And Events" colour="#5CA655">
     <block type="draw_loop"></block>
     <block type="update_loop"></block>
     <block type="on_touch_event"></block>
     <block type="on_drag_event"></block>
     <block type="get_last_touch_position"></block>
     <block type="get_last_drag_distance"></block>
+    <block type="clock_schedule">
+       <value name="DELAY"><shadow type="math_number"> <field name="NUM">0.5</field> </shadow></value>
+    </block>
+    <block type="clock_schedule_interval">
+       <value name="INTERVAL"><shadow type="math_number"> <field name="NUM">0.5</field> </shadow></value>
+    </block>
+    <block type="clock_unschedule"></block>
+  </category>
+  
+  
+  <category name="Standard Loops" colour="#5CA65C">  
     <block type="controls_repeat_ext">
       <value name="TIMES">
         <shadow type="math_number">
@@ -158,6 +169,8 @@
       <field name="FLOW">BREAK</field>
     </block>
   </category>
+  
+  
   <category name="Logic" colour="#5C81A6">
     <block type="controls_if"></block>
     <block type="logic_compare">
