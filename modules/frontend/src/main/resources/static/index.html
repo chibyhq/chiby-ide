@@ -3,43 +3,41 @@
   <head>
     <title>Chiby IDE</title>
     <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="images/favicon.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="favicon.png"/>
     <link rel="stylesheet" href="webjars/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/chiby-ide.css"/>
-   <style>
-    
-  </style>
-
- </head>
-  <body style="background: black;">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <img style="padding-top:8px" src="images/banner.png">
-        </div>
-          <div id="navbar">
-            <ul class="nav navbar-nav">
-              <li><a id="whatnot-script-action-button" href="#"><span id="whatnot-script-action-icon" class="glyphicon glyphicon-play" aria-hidden="true"></span> <span class="ladda-label" id="whatnot-script-action-label">Run</span></a></li>
-              <li><a href="#" class="whatnot-status-label">Current Status : <b><span id="whatnot-status-label">Stopped</span></b> <span id="whatnot-status-icon" class="glyphicon glyphicon-stop" aria-hidden="true"></span></a></li>
-            </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Open...</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> Save as...</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Settings</a></li>
+  </head>
+  <body style="background: #0b2228;">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><img src="images/brand.png" height="48" width="174"></a>
+                </div>
+          <ul class="nav navbar-nav">
+            <li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New project</a></li>
+            <li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Open project</a></li>
           </ul>
-         </div>
-      </div>
-    </nav>
-    
-  <div id="panel-program" class="container-fluid">
-        <div class="row">
+        </div>
+      </nav>
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <p class="navbar-text">Project</p>
+          <ul class="nav navbar-nav">
+            <li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Run</a></li>
+            <li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-open" aria-hidden="true"></span> Connect</a></li>
+         </ul>
+        </div>
+      </nav>
+      
+      
+      <div id="panel-program" class="container-fluid">
+        <!--div class="row">
               <div class="col-sm-12" style="margin-top:40px">&nbsp;</div>
-          </div>
+          </div-->
         <div class="row">
               <div class="col-sm-12 col-lg-8 main" style="padding-right:0px">
                 <iframe id="blocklyFrame" style="width:100%; height:100%;" src="frame.html"></iframe>
@@ -52,9 +50,9 @@
                     
                  <div class="tab-content">
                   <div class="tab-pane active" id="script-preview">
-                     <div id="whatnot-script-preview-panel" class="panel panel-default" style="border-top-left-radius: 0px;border-top-right-radius: 0px;">
+                     <div id="chiby-script-preview-panel" class="panel panel-default" style="border-top-left-radius: 0px;border-top-right-radius: 0px;">
                         <div class="panel-body" style="padding:0px">
-                            <textarea readonly id="whatnot-script-preview-textarea" class="whatnot-textarea col-sm-12"></textarea>
+                            <textarea readonly id="chiby-script-preview-textarea" class="chiby-textarea col-sm-12"></textarea>
                          </div>
                      </div>
                   </div>
@@ -62,52 +60,22 @@
                       <div class="btn-group btn-group-sm" role="group" style="padding:5px;background-color:white;width:100%;border-top-right-radius: 4px;">
                           <a href="#"  onclick="clearConsole()" class="btn btn-default"><span class="glyphicon glyphicon-ban-circle"></span> Clear</a>
                         </div>
-                      <div id="whatnot-console-panel" class="panel panel-default" style="border-top-left-radius: 0px;border-top-right-radius: 0px;">
+                      <div id="chiby-console-panel" class="panel panel-default" style="border-top-left-radius: 0px;border-top-right-radius: 0px;">
                          <div class="panel-body" style="padding:0px">
-                           <textarea readonly id="whatnot-console-textarea" class="whatnot-textarea col-sm-12"></textarea>
+                           <textarea readonly id="chiby-console-textarea" class="chiby-textarea col-sm-12"></textarea>
                           </div>
                       </div>
                   </div>
                   
                 </div>
           </div>
+        </div>
       </div>
-  </div>
- 
+      
    <script src="webjars/jquery/jquery.js"></script>
    <script src="webjars/bootstrap/js/bootstrap.min.js"></script>
    
    <script type="text/javascript">
-          // This function should be integrated in the pygamezero
-          // library eventually
-          function onActorAdded(event){
-          //   if(event.type == Blockly.Events.CREATE
-          //       && event.xml.attributes["type"].value == "actor"){
-          //   
-          //      // Maintain a map of ACTOR to BLOCK UUID
-          //      
-          //      var actorName = Blockly.Variables.promptName("Please name this actor", "", function(newName){
-          //              if(newName != null){
-          //                  var workspace = Blockly.Workspace.getById(event.workspaceId);
-          //                  workspace.createVariable(newName);
-          //              }else{
-          //                  // prevent the block's creation
-          //              }
-          //      });
-          //      
-          //      
-          //   }
-          //  if(event.type == Blockly.Events.CHANGE
-          //      && event.element == "field"
-          //      && event.name == "NAME"){
-          //   // Look up the block and find if it is an ACTOR block
-          //   console.log("Actor name changed", event);
-          //   Blockly.Variables.renameVariable(event.oldValue,event.newValue);
-          //   
-          // }
-          }
-   
-   
           function blocklyLoaded(blockly) {
             // Called once Blockly is fully loaded, provides a 
             // window-wide access to its functions.
@@ -122,13 +90,13 @@
             blockly.mainWorkspace.addChangeListener(function (event){
                 Blockly.Python.INFINITE_LOOP_TRAP = null;
                 var code = Blockly.Python.workspaceToCode(Blockly.Workspace.getById(event.workspaceId));
-                $("#whatnot-script-preview-textarea").val(code);
+                $("#chiby-script-preview-textarea").val(code);
              });
              
         //     blockly.mainWorkspace.addChangeListener(onActorAdded);
           }
     </script>
-    <!--script src="js/blockly-storage.js"></script-->
+
     <script type="text/javascript">
          
           function getWindowDimensions() { 
@@ -145,19 +113,19 @@
      $(document).ready(function(){
           var dim = getWindowDimensions();
           // Leave space for the top navigation bar
-          $('#blocklyFrame').height((dim[1]-80) + "px");
+          $('#blocklyFrame').height((dim[1]-120) + "px");
           // Leave space for the top navigation bar
-          $('#whatnot-console-textarea').height((dim[1]-167) + "px");
-          $('#whatnot-script-preview-textarea').height((dim[1]-127) + "px");
+          $('#chiby-console-textarea').height((dim[1]-210) + "px");
+          $('#chiby-script-preview-textarea').height((dim[1]-170) + "px");
           
           
           window.clearConsole = function(){
-            $("#whatnot-console-textarea").text("");
+            $("#chiby-console-textarea").text("");
           }
 
       });
    
       
     </script>  
-</body>
-</html>
+      
+  </body>

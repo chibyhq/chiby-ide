@@ -33,105 +33,116 @@
   </head>
   <body onload="init()">
 <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
-  <category name="Actors" colour="#a55b5b">
-    <block type="actor">
-      <field name="NAME"></field>
-      <field name="ANCHOR">center</field>
-      <field name="POSX">0</field>
-      <field name="POSY">0</field>
-    </block>
-    <block type="actor_image">
-      <field name="ACTOR"></field>
-      <value name="IMAGE"><shadow type="text"><field name="TEXT"></field></shadow></value>
-    </block>
-    <block type="get_actor_property">
-      <field name="PROPERTY"></field>
-      <field name="ACTOR"></field>
-    </block>
-    <block type="actor_colliding">
-      <field name="ACTOR">  </field>
-    </block>
-    <block type="actor_position">
-      <field name="ACTOR">  </field>
-      <value name="POSX"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
-      <value name="POSY"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
-    </block>
-    <block type="actor_draw">
-      <field name="ACTOR"></field>
-    </block>
-  </category>
-  <category name="Screen" colour="#6d5ba5">
-    <block type="screen_clear"></block>
-    <block type="screen_fill">
-      <field name="COLOR">#000000</field>
-    </block>
-    <block type="screen_draw_line">
-      <value name="STARTX"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
-      <value name="STARTY"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
-      <value name="FINISHX"><shadow type="math_number"><field name="NUM">20</field></shadow></value>
-      <value name="FINISHY"><shadow type="math_number"><field name="NUM">20</field></shadow></value>
-      <field name="COLOR">#FFFFFF</field>
-    </block>
-    <block type="screen_draw_circle">
-      <value name="CENTERX"><shadow type="math_number"><field name="NUM">30</field></shadow></value>
-      <value name="CENTERY"><shadow type="math_number"><field name="NUM">30</field></shadow></value>
-      <value name="RADIUS"><shadow type="math_number"><field name="NUM">20</field></shadow></value>
-      <field name="COLOR">#FFFF00</field>
-    </block>
-    <block type="screen_draw_rectangle">
-      <value name="RECT"></value>
-      <field name="COLOR">#FFFF00</field>
-    </block>
-    <block type="screen_draw_text">
-      <value name="TEXT"><shadow type="text"><field name="TEXT">Hello World !</field></shadow></value>
-    </block>
-
-    <block type="screen_blit">
-      <value name="IMAGE"><shadow type="text"><field name="TEXT"></field></shadow></value>
-      <value name="TOP"> <shadow type="math_number"> <field name="NUM">0</field> </shadow> </value>
-      <value name="LEFT"> <shadow type="math_number"> <field name="NUM">0</field> </shadow> </value>
-    </block>
-    <block type="screen_create_rect">
-      <value name="X"> <shadow type="math_number"> <field name="NUM">10</field> </shadow> </value>
-      <value name="Y"> <shadow type="math_number"> <field name="NUM">10</field> </shadow> </value>
-      <value name="WIDTH"> <shadow type="math_number"> <field name="NUM">20</field> </shadow> </value>
-      <value name="HEIGHT"> <shadow type="math_number"> <field name="NUM">20</field> </shadow> </value>
-    </block>
-    
-  </category>
-  <category name="Text Format" colour="#5CA65C">
-    <block type="format_font_color"></block>
-    <block type="format_font_bgcolor"></block>
-    <block type="format_font_size"><value name="VALUE"><shadow type="math_number"> <field name="NUM">10</field> </shadow></value></block>
-    <block type="format_font_name"><value name="VALUE"><shadow type="text"><field name="TEXT"></field></shadow></value></block>
-    <block type="format_text_position">
-       <value name="X"><shadow type="math_number"> <field name="NUM">10</field> </shadow></value>
-       <value name="Y"><shadow type="math_number"> <field name="NUM">10</field> </shadow></value>
-    </block>
-    <block type="format_text_rotation"></block>
-    <block type="format_text_align"></block>
-    <block type="format_text_shadow">
-       <value name="X"><shadow type="math_number"> <field name="NUM">1.0</field> </shadow></value>
-       <value name="Y"><shadow type="math_number"> <field name="NUM">-1.0</field> </shadow></value>
-    </block>
-  </category>
+      <category name="Actors" colour="#a55b5b">
+        <block type="actor">
+          <field name="NAME"></field>
+          <field name="ANCHOR">center</field>
+          <field name="POSX">0</field>
+          <field name="POSY">0</field>
+        </block>
+        <block type="actor_image">
+          <field name="ACTOR"></field>
+          <value name="IMAGE"><shadow type="text"><field name="TEXT"></field></shadow></value>
+        </block>
+        <block type="actor_draw">
+          <field name="ACTOR"></field>
+        </block>
+        <block type="get_actor_property">
+          <field name="PROPERTY"></field>
+          <field name="ACTOR"></field>
+        </block>
+        <block type="actor_colliding">
+          <field name="ACTOR">  </field>
+        </block>
+        <block type="actor_position_tuple">
+          <field name="ACTOR">  </field>
+          <value name="POS"></value>
+        </block>
+        <block type="actor_position">
+          <field name="ACTOR">  </field>
+          <value name="POSX"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+          <value name="POSY"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+        </block>
+      </category>  
+      <category name="Main Loops" colour="#5CA655">
+        <block type="draw_loop"></block>
+        <block type="update_loop"></block>
+      </category>
+      <category name="Animation" colour="#6d5b58">
+        <block type="animate">
+          <field name="OBJECT"></field>
+        </block>
+      </category>
+      <category name="Screen" colour="#6d5ba5">
+        <block type="screen_clear"></block>
+        <block type="screen_fill">
+          <field name="COLOR">#000000</field>
+        </block>
+        <block type="screen_draw_line">
+          <value name="STARTX"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+          <value name="STARTY"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+          <value name="FINISHX"><shadow type="math_number"><field name="NUM">20</field></shadow></value>
+          <value name="FINISHY"><shadow type="math_number"><field name="NUM">20</field></shadow></value>
+          <field name="COLOR">#FFFFFF</field>
+        </block>
+        <block type="screen_draw_circle">
+          <value name="CENTERX"><shadow type="math_number"><field name="NUM">30</field></shadow></value>
+          <value name="CENTERY"><shadow type="math_number"><field name="NUM">30</field></shadow></value>
+          <value name="RADIUS"><shadow type="math_number"><field name="NUM">20</field></shadow></value>
+          <field name="COLOR">#FFFF00</field>
+        </block>
+        <block type="screen_draw_rectangle">
+          <value name="RECT"></value>
+          <field name="COLOR">#FFFF00</field>
+        </block>
+        <block type="screen_blit">
+          <value name="IMAGE"><shadow type="text"><field name="TEXT"></field></shadow></value>
+          <value name="TOP"> <shadow type="math_number"> <field name="NUM">0</field> </shadow> </value>
+          <value name="LEFT"> <shadow type="math_number"> <field name="NUM">0</field> </shadow> </value>
+        </block>
+        <block type="screen_create_rect">
+          <value name="X"> <shadow type="math_number"> <field name="NUM">10</field> </shadow> </value>
+          <value name="Y"> <shadow type="math_number"> <field name="NUM">10</field> </shadow> </value>
+          <value name="WIDTH"> <shadow type="math_number"> <field name="NUM">20</field> </shadow> </value>
+          <value name="HEIGHT"> <shadow type="math_number"> <field name="NUM">20</field> </shadow> </value>
+        </block>
+        
+      </category>
+      <category name="Text Format" colour="#2a1c71">
+        <block type="screen_draw_text">
+          <value name="TEXT"><shadow type="text"><field name="TEXT">Hello World !</field></shadow></value>
+        </block>
+        <block type="format_font_color"></block>
+        <block type="format_font_bgcolor"></block>
+        <block type="format_font_size"><value name="VALUE"><shadow type="math_number"> <field name="NUM">10</field> </shadow></value></block>
+        <block type="format_font_name"><value name="VALUE"><shadow type="text"><field name="TEXT"></field></shadow></value></block>
+        <block type="format_text_position">
+           <value name="X"><shadow type="math_number"> <field name="NUM">10</field> </shadow></value>
+           <value name="Y"><shadow type="math_number"> <field name="NUM">10</field> </shadow></value>
+        </block>
+        <block type="format_text_rotation"></block>
+        <block type="format_text_align"></block>
+        <block type="format_text_shadow">
+           <value name="X"><shadow type="math_number"> <field name="NUM">1.0</field> </shadow></value>
+           <value name="Y"><shadow type="math_number"> <field name="NUM">-1.0</field> </shadow></value>
+        </block>
+      </category>
+      
+      <category name="Events" colour="#5CA655">
+        <block type="on_touch_event"></block>
+        <block type="on_drag_event"></block>
+        <block type="get_last_touch_position"></block>
+        <block type="get_last_drag_distance"></block>
+        <block type="clock_schedule">
+           <value name="DELAY"><shadow type="math_number"> <field name="NUM">0.5</field> </shadow></value>
+        </block>
+        <block type="clock_schedule_interval">
+           <value name="INTERVAL"><shadow type="math_number"> <field name="NUM">0.5</field> </shadow></value>
+        </block>
+        <block type="clock_unschedule"></block>
+      </category>
   
-  <category name="Pygamezero Loops And Events" colour="#5CA655">
-    <block type="draw_loop"></block>
-    <block type="update_loop"></block>
-    <block type="on_touch_event"></block>
-    <block type="on_drag_event"></block>
-    <block type="get_last_touch_position"></block>
-    <block type="get_last_drag_distance"></block>
-    <block type="clock_schedule">
-       <value name="DELAY"><shadow type="math_number"> <field name="NUM">0.5</field> </shadow></value>
-    </block>
-    <block type="clock_schedule_interval">
-       <value name="INTERVAL"><shadow type="math_number"> <field name="NUM">0.5</field> </shadow></value>
-    </block>
-    <block type="clock_unschedule"></block>
-  </category>
-  
+  <sep></sep>
   
   <category name="Standard Loops" colour="#5CA65C">  
     <block type="controls_repeat_ext">
