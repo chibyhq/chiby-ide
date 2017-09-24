@@ -23,23 +23,32 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<milton.version>2.7.2.4</milton.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
 		<dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator</artifactId>
             <version>0.31</version>
         </dependency>
         
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>io.milton</groupId>
+            <artifactId>milton-server-ce</artifactId>
+            <version>${milton.version}</version>
+            <exclusions>
+            	<exclusion>
+            		<groupId>javax.servlet</groupId>
+            		<artifactId>servlet-api</artifactId>
+            	</exclusion>
+            </exclusions>
+        </dependency>  
         
         <dependency>
             <groupId>org.webjars</groupId>
@@ -170,6 +179,11 @@
               </plugin>
 		</plugins>
 	</build>
-
-
+	
+    <repositories>
+        <repository>
+            <id>milton-repo</id>
+            <url>http://dl.bintray.com/milton/Milton</url>
+        </repository>
+    </repositories>
 </project>

@@ -3,9 +3,4 @@ spring.mvc.favicon.enabled: false
 chiby.project.home: /tmp/projects
 
 milton:
-  filesystem_root: /tmp
-  exclude_paths:
-    - /static
-    - /templates
-    - /management
-    - /webjars
+  filesystemroot: /tmp/projects
