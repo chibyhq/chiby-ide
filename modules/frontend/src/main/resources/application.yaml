@@ -1,6 +1,5 @@
 spring.mvc.favicon.enabled: false
-
+spring.data.rest.base-path: /data
 chiby.project.home: /tmp/projects
 
-milton:
-  filesystemroot: /tmp/projects
+milton.filesystemroot: ${chiby.project.home}
