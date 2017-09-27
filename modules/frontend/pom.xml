@@ -10,16 +10,16 @@
 
 	<name>frontend</name>
 	<description>Web frontend for Chiby IDE</description>
-	
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.6.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
-        <base.image>resin/raspberry-pi3-alpine-openjdk:8</base.image>
+		<base.image>resin/raspberry-pi3-alpine-openjdk:8</base.image>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -31,71 +31,75 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
-		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-rest</artifactId>
-        </dependency>
-		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-hateoas</artifactId>
-        </dependency>
 
 		<dependency>
-          <groupId>org.springframework.data</groupId>
-          <artifactId>spring-data-keyvalue</artifactId>
-        </dependency>
-        
-        <dependency>
-          <groupId>com.querydsl</groupId>
-          <artifactId>querydsl-collections</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
 
 		<dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>webjars-locator</artifactId>
-            <version>0.31</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>io.milton</groupId>
-            <artifactId>milton-server-ce</artifactId>
-            <version>${milton.version}</version>
-            <exclusions>
-            	<exclusion>
-            		<groupId>javax.servlet</groupId>
-            		<artifactId>servlet-api</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency>  
-        
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>3.3.7-1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery</artifactId>
-            <version>3.1.1</version>
-        </dependency>	
-        
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>blockly</artifactId>
-             <version>fdb2698d000</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.chiby.blockly</groupId>
-            <artifactId>blockly-pygamezero</artifactId>
-            <version>[0.1-SNAPSHOT,)</version>
-        </dependency>
-		
-        <dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-keyvalue</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-collections</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator</artifactId>
+			<version>0.31</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.milton</groupId>
+			<artifactId>milton-server-ce</artifactId>
+			<version>${milton.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.3.7-1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.webjars.npm</groupId>
+		    <artifactId>hybind</artifactId>
+		    <version>1.4.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>blockly</artifactId>
+			<version>fdb2698d000</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.chiby.blockly</groupId>
+			<artifactId>blockly-pygamezero</artifactId>
+			<version>[0.1-SNAPSHOT,)</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.github.chiby.player</groupId>
 			<artifactId>repositories</artifactId>
 			<version>[0.1-SNAPSHOT,)</version>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -105,18 +109,21 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
-		
 		<dependency>
-			  <groupId>com.google.jimfs</groupId>
-			  <artifactId>jimfs</artifactId>
-			  <version>1.1</version>
-			  <scope>test</scope>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-core</artifactId>
-		    <version>2.8.47</version>
-		    <scope>test</scope>
+			<groupId>com.google.jimfs</groupId>
+			<artifactId>jimfs</artifactId>
+			<version>1.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>2.8.47</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -136,94 +143,98 @@
 					<addResources>true</addResources>
 				</configuration>
 			</plugin>
-           <plugin>
-                <groupId>com.jamesward</groupId>
-                <artifactId>unsnapshot-maven-plugin</artifactId>
-                <version>0.2</version>
-                <executions>
-                    <execution>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>unsnapshot</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>io.reformanda.semper</groupId>
-                <artifactId>dependencyversion-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <executions>
-                    <execution>
-                        <id>set-all</id>
-                        <goals>
-                            <goal>set-version</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.13</version>
-                <executions>
-                     <execution>
-                       <id>build-image</id>
-                       <phase>package</phase>
-                       <goals> <goal>build</goal> </goals>
-                     </execution>
-                     <execution>
-                      <id>push-image</id>
-                      <phase>deploy</phase>
-                      <goals>
-                        <goal>push</goal>
-                      </goals>
-                      <configuration>
-                        <imageName>chiby-hq/ide</imageName>
-                      </configuration>
-                    </execution>    
-                </executions>
-                <configuration>
-                    <imageName>chiby-hq/ide</imageName>
-                    <baseImage>${base.image}</baseImage>
-                    <forceTags>true</forceTags>
-                    <useConfigFile>true</useConfigFile>
-                    <imageTags>
-                       <imageTag>${project.version}</imageTag>
-                    </imageTags>
-                    <env>
-                      <IDE_HOME>/opt/chiby-ide</IDE_HOME>
-                      <IDE_LOGS>/var/log/chiby-ide</IDE_LOGS>
-                      <LANG>C.UTF-8</LANG>
-                    </env>
-                    <runs>
-                      <run>mkdir -p $IDE_HOME</run>
-                      <run>mkdir -p $IDE_LOGS</run>
-                    </runs>
-                    <workdir>$IDE_HOME</workdir>
-                    <cmd>["java","-jar","${build.finalName}"]</cmd>
-                    <exposes>
-                      <expose>8080</expose>
-                    </exposes>
-                    <volumes>
-                      <volume>$IDE_LOGS</volume>
-                    </volumes>
-                    <resources>
-                       <resource>
-                         <directory>${project.build.directory}</directory>
-                         <includes><include>${build.finalName}</include></includes>
-                         <targetPath>${IDE_HOME}</targetPath>
-                       </resource>
-                    </resources>
-                </configuration>
-              </plugin>
+			<plugin>
+				<groupId>com.jamesward</groupId>
+				<artifactId>unsnapshot-maven-plugin</artifactId>
+				<version>0.2</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>unsnapshot</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.reformanda.semper</groupId>
+				<artifactId>dependencyversion-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<id>set-all</id>
+						<goals>
+							<goal>set-version</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.13</version>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>push-image</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>push</goal>
+						</goals>
+						<configuration>
+							<imageName>chiby-hq/ide</imageName>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<imageName>chiby-hq/ide</imageName>
+					<baseImage>${base.image}</baseImage>
+					<forceTags>true</forceTags>
+					<useConfigFile>true</useConfigFile>
+					<imageTags>
+						<imageTag>${project.version}</imageTag>
+					</imageTags>
+					<env>
+						<IDE_HOME>/opt/chiby-ide</IDE_HOME>
+						<IDE_LOGS>/var/log/chiby-ide</IDE_LOGS>
+						<LANG>C.UTF-8</LANG>
+					</env>
+					<runs>
+						<run>mkdir -p $IDE_HOME</run>
+						<run>mkdir -p $IDE_LOGS</run>
+					</runs>
+					<workdir>$IDE_HOME</workdir>
+					<cmd>["java","-jar","${build.finalName}"]</cmd>
+					<exposes>
+						<expose>8080</expose>
+					</exposes>
+					<volumes>
+						<volume>$IDE_LOGS</volume>
+					</volumes>
+					<resources>
+						<resource>
+							<directory>${project.build.directory}</directory>
+							<includes>
+								<include>${build.finalName}</include>
+							</includes>
+							<targetPath>${IDE_HOME}</targetPath>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-	
-    <repositories>
-        <repository>
-            <id>milton-repo</id>
-            <url>http://dl.bintray.com/milton/Milton</url>
-        </repository>
-    </repositories>
+
+	<repositories>
+		<repository>
+			<id>milton-repo</id>
+			<url>http://dl.bintray.com/milton/Milton</url>
+		</repository>
+	</repositories>
 </project>

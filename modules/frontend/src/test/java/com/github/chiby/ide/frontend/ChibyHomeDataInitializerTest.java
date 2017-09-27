@@ -1,26 +1,24 @@
 package com.github.chiby.ide.frontend;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.UUID;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.yaml.snakeyaml.Yaml;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.github.chiby.player.model.Application;
+import com.github.chiby.player.model.ApplicationTypeConstants;
+import com.github.chiby.player.model.ApplicationTypeEnum;
 import com.github.chiby.store.model.repositories.ApplicationRepository;
-import com.google.common.collect.ImmutableList;
 import com.google.common.jimfs.Jimfs;
-
-import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChibyHomeDataInitializerTest {
@@ -35,14 +33,17 @@ public class ChibyHomeDataInitializerTest {
 	@Test
 	public void testSimpleHome() throws Exception {
 		ChibyHomeDataInitializer chdi = new ChibyHomeDataInitializer();
-		Yaml yaml = new Yaml();
 		chdi.frontendConfig = FrontendConfig.builder().home("/projects").build();
 		FileSystem fs = Jimfs.newFileSystem();
-		Path projectHome = fs.getPath("/projects/app1");
+		UUID uuid = UUID.randomUUID();
+		Path projectHome = fs.getPath("/projects/"+uuid.toString());
 		Files.createDirectories(projectHome);
 		
-		Application app = Application.builder().title("App title 1").build();
-		Files.write(projectHome.resolve(".application.yml"), ImmutableList.of(yaml.dump(app)), StandardCharsets.UTF_8);
+		Application app = Application.builder().uuid(uuid).title("App title 1").build();
+		app.setType(ApplicationTypeEnum.PYGAMEZERO);
+		
+		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+		mapper.writeValue(Files.newOutputStream(projectHome.resolve(ApplicationTypeConstants.APPLICATION_YAML_FILE)), app);
 		
 		chdi.fileSystem = fs;
 		chdi.applicationRepository = applicationRepository;
