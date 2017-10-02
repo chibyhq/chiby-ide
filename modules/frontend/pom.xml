@@ -188,17 +188,18 @@
 							<goal>push</goal>
 						</goals>
 						<configuration>
-							<imageName>chiby-hq/ide</imageName>
+							<imageName>gitlab-registry.cern.ch/chiby-hq/images/ide</imageName>
 						</configuration>
 					</execution>
 				</executions>
 				<configuration>
-					<imageName>chiby-hq/ide</imageName>
+					<imageName>gitlab-registry.cern.ch/chiby-hq/images/ide</imageName>
 					<baseImage>${base.image}</baseImage>
 					<forceTags>true</forceTags>
 					<useConfigFile>true</useConfigFile>
 					<imageTags>
 						<imageTag>${project.version}</imageTag>
+						<imageTag>latest</imageTag>
 					</imageTags>
 					<env>
 						<IDE_HOME>/opt/chiby-ide</IDE_HOME>
