@@ -19,7 +19,7 @@
 	</parent>
 
 	<properties>
-		<base.image>resin/raspberry-pi3-alpine-openjdk:8</base.image>
+		<base.image>resin/raspberrypi3-alpine-openjdk:8-jdk</base.image>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -188,12 +188,12 @@
 							<goal>push</goal>
 						</goals>
 						<configuration>
-							<imageName>gitlab-registry.cern.ch/chiby-hq/images/ide</imageName>
+							<imageName>chiby/ide</imageName>
 						</configuration>
 					</execution>
 				</executions>
 				<configuration>
-					<imageName>gitlab-registry.cern.ch/chiby-hq/images/ide</imageName>
+					<imageName>chiby/ide</imageName>
 					<baseImage>${base.image}</baseImage>
 					<forceTags>true</forceTags>
 					<useConfigFile>true</useConfigFile>
@@ -222,7 +222,7 @@
 						<resource>
 							<directory>${project.build.directory}</directory>
 							<includes>
-								<include>${build.finalName}</include>
+								<include>${project.build.finalName}.${project.packaging}</include>
 							</includes>
 							<targetPath>${IDE_HOME}</targetPath>
 						</resource>
