@@ -19,13 +19,30 @@
 	</parent>
 
 	<properties>
-		<base.image>resin/raspberrypi3-alpine-openjdk:8-jdk</base.image>
+		<base.image>openjdk:8-jdk-alpine</base.image>
+		<image.name>chiby/ide</image.name>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<milton.version>2.7.2.4</milton.version>
 	</properties>
 
+	<profiles>
+	  <profile>
+	    <id>rpi3</id>
+	    <properties>
+		   <base.image>resin/raspberrypi3-alpine-openjdk:8-jdk</base.image>
+		   <image.name>chiby/rpi3-ide</image.name>
+		 </properties>
+      </profile>
+	  <profile>
+	    <id>gitlab-x64</id>
+	    <properties>
+		   <image.name>gitlab-registry.cern.ch/chiby-hq/images/ide</image.name>
+		 </properties>
+      </profile>
+	</profiles>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -188,12 +205,12 @@
 							<goal>push</goal>
 						</goals>
 						<configuration>
-							<imageName>chiby/ide</imageName>
+							<imageName>${image.name}</imageName>
 						</configuration>
 					</execution>
 				</executions>
 				<configuration>
-					<imageName>chiby/ide</imageName>
+					<imageName>${image.name}</imageName>
 					<baseImage>${base.image}</baseImage>
 					<forceTags>true</forceTags>
 					<useConfigFile>true</useConfigFile>
