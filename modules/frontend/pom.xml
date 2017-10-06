@@ -228,7 +228,7 @@
 						<run>mkdir -p $IDE_LOGS</run>
 					</runs>
 					<workdir>$IDE_HOME</workdir>
-					<cmd>["java","-jar","${build.finalName}"]</cmd>
+					<cmd>["java","-jar","${project.build.finalName}.${project.packaging}"]</cmd>
 					<exposes>
 						<expose>8080</expose>
 					</exposes>
