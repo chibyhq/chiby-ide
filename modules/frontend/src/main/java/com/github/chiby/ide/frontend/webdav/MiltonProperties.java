@@ -25,6 +25,7 @@ public class MiltonProperties {
     public MiltonProperties(){
     	excludePaths.addAll(Arrays.asList(new String[]{
     			"/ide",
+    			"/tests",
     			"/data",
     			"/static",
     		    "/templates",
