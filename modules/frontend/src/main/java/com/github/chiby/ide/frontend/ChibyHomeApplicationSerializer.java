@@ -28,7 +28,7 @@ public class ChibyHomeApplicationSerializer {
 	ApplicationRepository repository;
 
 	@Autowired
-	FrontendConfig config;
+	FrontendConfigProperties config;
 
 	FileSystem fileSystem = FileSystems.getDefault();
 

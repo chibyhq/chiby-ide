@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @ConfigurationProperties(prefix = "chiby.frontend",ignoreUnknownFields = false)
-public class FrontendConfig {
+public class FrontendConfigProperties {
 
 	String home;
 }

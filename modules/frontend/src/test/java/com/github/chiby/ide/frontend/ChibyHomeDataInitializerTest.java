@@ -33,7 +33,7 @@ public class ChibyHomeDataInitializerTest {
 	@Test
 	public void testSimpleHome() throws Exception {
 		ChibyHomeDataInitializer chdi = new ChibyHomeDataInitializer();
-		chdi.frontendConfig = FrontendConfig.builder().home("/projects").build();
+		chdi.frontendConfig = FrontendConfigProperties.builder().home("/projects").build();
 		FileSystem fs = Jimfs.newFileSystem();
 		UUID uuid = UUID.randomUUID();
 		Path projectHome = fs.getPath("/projects/"+uuid.toString());

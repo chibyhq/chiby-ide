@@ -37,7 +37,7 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 	ApplicationRepository applicationRepository;
 
 	@Autowired
-	FrontendConfig frontendConfig;
+	FrontendConfigProperties frontendConfig;
 
 	FileSystem fileSystem = FileSystems.getDefault();
 

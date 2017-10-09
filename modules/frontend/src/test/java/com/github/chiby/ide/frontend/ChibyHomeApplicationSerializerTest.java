@@ -29,7 +29,7 @@ public class ChibyHomeApplicationSerializerTest {
 	@Test
 	public void test() throws IOException {
 		ChibyHomeApplicationSerializer chds = new ChibyHomeApplicationSerializer();
-		chds.config = FrontendConfig.builder().home("/projects").build();
+		chds.config = FrontendConfigProperties.builder().home("/projects").build();
 		FileSystem fs = Jimfs.newFileSystem();
 		UUID uuid = UUID.randomUUID();
 		Path projectHome = fs.getPath("/projects");
