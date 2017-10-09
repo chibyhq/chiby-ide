@@ -1,7 +1,7 @@
 html, body {
       height: 100%;
 }
-    
+
 body {
   background-color: #0b2228;
   font-family: sans-serif;
@@ -59,11 +59,19 @@ h1 {
 	color:#fff;
     padding:9px 15px;
     border-bottom:1px solid #eee;
-    background-color: #428bca;
+    background-color: #286090;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
      border-top-left-radius: 5px;
      border-top-right-radius: 5px;
+}
+
+.grid-item {
+  float: left;
+  width: 280px ;
+  height: 280px;
+  background: #e6e5e4;
+  border: 2px solid #b6b5b4;
 }
