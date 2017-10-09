@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="favicon.png"/>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/bootstrap-select/dist/css/bootstrap-select.min.css"/>
     <link rel="stylesheet" href="css/chiby-ide.css"/>
   </head>
   <body style="background: #0b2228;">
@@ -15,8 +16,8 @@
                     <a class="navbar-brand" href="#"><img src="images/brand.png" height="48" width="174"></a>
                 </div>
           <ul class="nav navbar-nav">
-            <li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New project</a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Open project</a></li>
+            <li class="nav-item"><a href="#" data-toggle="modal" data-target="#newApplicationModal" class="nav-link"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;New application</a></li>
+            <li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;Open application</a></li>
           </ul>
         </div>
       </nav>
@@ -72,8 +73,212 @@
         </div>
       </div>
       
+      
+      
+      
+      <div id="newApplicationModal" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-lg">
+        
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h1 class="modal-title"><i class="glyphicon glyphicon-plus"></i>&nbsp;Create a new application</h1>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group">
+                  <label for="title">Title</label>
+                  <input type="text" class="form-control" id="title" placeholder="Enter the application title">
+                  </div>
+                  <div class="form-group form-group-lg">
+                    <label for="avatar">Avatar</label><br/>
+                    <select title="Select an avatar" class="selectpicker show-tick show-menu-arrow" id="avatar" data-show-icon="true">
+<option data-icon="glyphicon glyphicon-apple">Apple</option>
+<option data-icon="glyphicon glyphicon-asterisk">Asterisk</option>
+<option data-icon="glyphicon glyphicon-baby-formula">Baby formula</option>
+<option data-icon="glyphicon glyphicon-backward">Backward</option>
+<option data-icon="glyphicon glyphicon-barcode">Barcode</option>
+<option data-icon="glyphicon glyphicon-bed">Bed</option>
+<option data-icon="glyphicon glyphicon-bell">Bell</option>
+<option data-icon="glyphicon glyphicon-bishop">Bishop</option>
+<option data-icon="glyphicon glyphicon-bitcoin">Bitcoin</option>
+<option data-icon="glyphicon glyphicon-blackboard">Blackboard</option>
+<option data-icon="glyphicon glyphicon-book">Book</option>
+<option data-icon="glyphicon glyphicon-bookmark">Bookmark</option>
+<option data-icon="glyphicon glyphicon-briefcase">Briefcase</option>
+<option data-icon="glyphicon glyphicon-bullhorn">Bullhorn</option>
+<option data-icon="glyphicon glyphicon-calendar">Calendar</option>
+<option data-icon="glyphicon glyphicon-camera">Camera</option>
+<option data-icon="glyphicon glyphicon-cd">Cd</option>
+<option data-icon="glyphicon glyphicon-certificate">Certificate</option>
+<option data-icon="glyphicon glyphicon-check">Check</option>
+<option data-icon="glyphicon glyphicon-cloud">Cloud</option>
+<option data-icon="glyphicon glyphicon-cog">Cog</option>
+<option data-icon="glyphicon glyphicon-comment">Comment</option>
+<option data-icon="glyphicon glyphicon-compressed">Compressed</option>
+<option data-icon="glyphicon glyphicon-console">Console</option>
+<option data-icon="glyphicon glyphicon-copy">Copy</option>
+<option data-icon="glyphicon glyphicon-cutlery">Cutlery</option>
+<option data-icon="glyphicon glyphicon-dashboard">Dashboard</option>
+<option data-icon="glyphicon glyphicon-download">Download</option>
+<option data-icon="glyphicon glyphicon-download-alt">Download alt</option>
+<option data-icon="glyphicon glyphicon-duplicate">Duplicate</option>
+<option data-icon="glyphicon glyphicon-earphone">Earphone</option>
+<option data-icon="glyphicon glyphicon-edit">Edit</option>
+<option data-icon="glyphicon glyphicon-education">Education</option>
+<option data-icon="glyphicon glyphicon-eject">Eject</option>
+<option data-icon="glyphicon glyphicon-envelope">Envelope</option>
+<option data-icon="glyphicon glyphicon-equalizer">Equalizer</option>
+<option data-icon="glyphicon glyphicon-erase">Erase</option>
+<option data-icon="glyphicon glyphicon-eur">Eur</option>
+<option data-icon="glyphicon glyphicon-euro">Euro</option>
+<option data-icon="glyphicon glyphicon-exclamation-sign">Exclamation sign</option>
+<option data-icon="glyphicon glyphicon-expand">Expand</option>
+<option data-icon="glyphicon glyphicon-eye-close">Eye close</option>
+<option data-icon="glyphicon glyphicon-eye-open">Eye open</option>
+<option data-icon="glyphicon glyphicon-facetime-video">Facetime video</option>
+<option data-icon="glyphicon glyphicon-fast-backward">Fast backward</option>
+<option data-icon="glyphicon glyphicon-fast-forward">Fast forward</option>
+<option data-icon="glyphicon glyphicon-file">File</option>
+<option data-icon="glyphicon glyphicon-film">Film</option>
+<option data-icon="glyphicon glyphicon-filter">Filter</option>
+<option data-icon="glyphicon glyphicon-fire">Fire</option>
+<option data-icon="glyphicon glyphicon-flag">Flag</option>
+<option data-icon="glyphicon glyphicon-flash">Flash</option>
+<option data-icon="glyphicon glyphicon-forward">Forward</option>
+<option data-icon="glyphicon glyphicon-fullscreen">Fullscreen</option>
+<option data-icon="glyphicon glyphicon-gbp">Gbp</option>
+<option data-icon="glyphicon glyphicon-gift">Gift</option>
+<option data-icon="glyphicon glyphicon-glass">Glass</option>
+<option data-icon="glyphicon glyphicon-globe">Globe</option>
+<option data-icon="glyphicon glyphicon-grain">Grain</option>
+<option data-icon="glyphicon glyphicon-header">Header</option>
+<option data-icon="glyphicon glyphicon-headphones">Headphones</option>
+<option data-icon="glyphicon glyphicon-heart">Heart</option>
+<option data-icon="glyphicon glyphicon-heart-empty">Heart empty</option>
+<option data-icon="glyphicon glyphicon-home">Home</option>
+<option data-icon="glyphicon glyphicon-hourglass">Hourglass</option>
+<option data-icon="glyphicon glyphicon-ice-lolly">Ice lolly</option>
+<option data-icon="glyphicon glyphicon-ice-lolly-tasted">Ice lolly-tasted</option>
+<option data-icon="glyphicon glyphicon-import">Import</option>
+<option data-icon="glyphicon glyphicon-inbox">Inbox</option>
+<option data-icon="glyphicon glyphicon-indent-left">Indent left</option>
+<option data-icon="glyphicon glyphicon-indent-right">Indent right</option>
+<option data-icon="glyphicon glyphicon-info-sign">Info sign</option>
+<option data-icon="glyphicon glyphicon-king">King</option>
+<option data-icon="glyphicon glyphicon-knight">Knight</option>
+<option data-icon="glyphicon glyphicon-lamp">Lamp</option>
+<option data-icon="glyphicon glyphicon-leaf">Leaf</option>
+<option data-icon="glyphicon glyphicon-level-up">Level up</option>
+<option data-icon="glyphicon glyphicon-link">Link</option>
+<option data-icon="glyphicon glyphicon-list">List</option>
+<option data-icon="glyphicon glyphicon-list-alt">List alt</option>
+<option data-icon="glyphicon glyphicon-lock">Lock</option>
+<option data-icon="glyphicon glyphicon-log-in">Log in</option>
+<option data-icon="glyphicon glyphicon-log-out">Log out</option>
+<option data-icon="glyphicon glyphicon-magnet">Magnet</option>
+<option data-icon="glyphicon glyphicon-map-marker">Map marker</option>
+<option data-icon="glyphicon glyphicon-minus">Minus</option>
+<option data-icon="glyphicon glyphicon-minus-sign">Minus sign</option>
+<option data-icon="glyphicon glyphicon-move">Move</option>
+<option data-icon="glyphicon glyphicon-music">Music</option>
+<option data-icon="glyphicon glyphicon-off">Off</option>
+<option data-icon="glyphicon glyphicon-oil">Oil</option>
+<option data-icon="glyphicon glyphicon-ok">Ok</option>
+<option data-icon="glyphicon glyphicon-open">Open</option>
+<option data-icon="glyphicon glyphicon-open-file">Open file</option>
+<option data-icon="glyphicon glyphicon-option-horizontal">Option horizontal</option>
+<option data-icon="glyphicon glyphicon-option-vertical">Option vertical</option>
+<option data-icon="glyphicon glyphicon-paperclip">Paperclip</option>
+<option data-icon="glyphicon glyphicon-paste">Paste</option>
+<option data-icon="glyphicon glyphicon-pause">Pause</option>
+<option data-icon="glyphicon glyphicon-pawn">Pawn</option>
+<option data-icon="glyphicon glyphicon-pencil">Pencil</option>
+<option data-icon="glyphicon glyphicon-phone">Phone</option>
+<option data-icon="glyphicon glyphicon-phone-alt">Phone alt</option>
+<option data-icon="glyphicon glyphicon-picture">Picture</option>
+<option data-icon="glyphicon glyphicon-piggy-bank">Piggy bank</option>
+<option data-icon="glyphicon glyphicon-plane">Plane</option>
+<option data-icon="glyphicon glyphicon-play">Play</option>
+<option data-icon="glyphicon glyphicon-play-circle">Play circle</option>
+<option data-icon="glyphicon glyphicon-plus">Plus</option>
+<option data-icon="glyphicon glyphicon-plus-sign">Plus sign</option>
+<option data-icon="glyphicon glyphicon-print">Print</option>
+<option data-icon="glyphicon glyphicon-pushpin">Pushpin</option>
+<option data-icon="glyphicon glyphicon-qrcode">Qrcode</option>
+<option data-icon="glyphicon glyphicon-queen">Queen</option>
+<option data-icon="glyphicon glyphicon-question-sign">Question sign</option>
+<option data-icon="glyphicon glyphicon-random">Random</option>
+<option data-icon="glyphicon glyphicon-record">Record</option>
+<option data-icon="glyphicon glyphicon-refresh">Refresh</option>
+<option data-icon="glyphicon glyphicon-registration-mark">Registration mark</option>
+<option data-icon="glyphicon glyphicon-remove">Remove</option>
+<option data-icon="glyphicon glyphicon-remove-circle">Remove circle</option>
+<option data-icon="glyphicon glyphicon-remove-sign">Remove sign</option>
+<option data-icon="glyphicon glyphicon-repeat">Repeat</option>
+<option data-icon="glyphicon glyphicon-resize-full">Resize full</option>
+<option data-icon="glyphicon glyphicon-resize-horizontal">Resize horizontal</option>
+<option data-icon="glyphicon glyphicon-resize-small">Resize small</option>
+<option data-icon="glyphicon glyphicon-resize-vertical">Resize vertical</option>
+<option data-icon="glyphicon glyphicon-retweet">Retweet</option>
+<option data-icon="glyphicon glyphicon-road">Road</option>
+<option data-icon="glyphicon glyphicon-ruble">Ruble</option>
+<option data-icon="glyphicon glyphicon-save">Save</option>
+<option data-icon="glyphicon glyphicon-save-file">Save file</option>
+<option data-icon="glyphicon glyphicon-saved">Saved</option>
+<option data-icon="glyphicon glyphicon-scale">Scale</option>
+<option data-icon="glyphicon glyphicon-scissors">Scissors</option>
+<option data-icon="glyphicon glyphicon-screenshot">Screenshot</option>
+<option data-icon="glyphicon glyphicon-sd-video">Sd video</option>
+<option data-icon="glyphicon glyphicon-search">Search</option>
+<option data-icon="glyphicon glyphicon-send">Send</option>
+<option data-icon="glyphicon glyphicon-share">Share</option>
+<option data-icon="glyphicon glyphicon-share-alt">Share alt</option>
+<option data-icon="glyphicon glyphicon-shopping-cart">Shopping cart</option>
+<option data-icon="glyphicon glyphicon-signal">Signal</option>
+<option data-icon="glyphicon glyphicon-sort">Sort</option>
+<option data-icon="glyphicon glyphicon-sound-stereo">Sound stereo</option>
+<option data-icon="glyphicon glyphicon-star">Star</option>
+<option data-icon="glyphicon glyphicon-star-empty">Star empty</option>
+<option data-icon="glyphicon glyphicon-stats">Stats</option>
+<option data-icon="glyphicon glyphicon-sunglasses">Sunglasses</option>
+<option data-icon="glyphicon glyphicon-superscript">Superscript</option>
+<option data-icon="glyphicon glyphicon-tag">Tag</option>
+<option data-icon="glyphicon glyphicon-tasks">Tasks</option>
+<option data-icon="glyphicon glyphicon-tent">Tent</option>
+<option data-icon="glyphicon glyphicon-thumbs-up">Thumbs up</option>
+<option data-icon="glyphicon glyphicon-time">Time</option>
+<option data-icon="glyphicon glyphicon-tint">Tint</option>
+<option data-icon="glyphicon glyphicon-tower">Tower</option>
+<option data-icon="glyphicon glyphicon-transfer">Transfer</option>
+<option data-icon="glyphicon glyphicon-trash">Trash</option>
+<option data-icon="glyphicon glyphicon-tree-conifer">Tree conifer</option>
+<option data-icon="glyphicon glyphicon-tree-deciduous">Tree deciduous</option>
+<option data-icon="glyphicon glyphicon-upload">Upload</option>
+<option data-icon="glyphicon glyphicon-usd">Usd</option>
+<option data-icon="glyphicon glyphicon-user">User</option>
+<option data-icon="glyphicon glyphicon-volume-up">Volume up</option>
+<option data-icon="glyphicon glyphicon-warning-sign">Warning sign</option>
+<option data-icon="glyphicon glyphicon-wrench">Wrench</option>
+<option data-icon="glyphicon glyphicon-yen">Yen</option>
+<option data-icon="glyphicon glyphicon-zoom-in">Zoom in</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+        
+          </div>
+        </div>
+      
+      
+      
+      
    <script src="/webjars/jquery/jquery.js"></script>
    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+   <script src="/webjars/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
    
    <script type="text/javascript">
           function blocklyLoaded(blockly) {
