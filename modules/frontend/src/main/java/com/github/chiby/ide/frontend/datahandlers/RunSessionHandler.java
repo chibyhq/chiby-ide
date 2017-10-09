@@ -1,13 +1,20 @@
 package com.github.chiby.ide.frontend.datahandlers;
 
+import java.util.Date;
+import java.util.logging.Level;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
-import org.springframework.data.rest.core.annotation.HandleBeforeDelete;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.stereotype.Component;
 
+import com.github.chiby.player.DockerExecutor;
 import com.github.chiby.player.model.RunSession;
+import com.spotify.docker.client.exceptions.DockerCertificateException;
+import com.spotify.docker.client.exceptions.DockerException;
+
+import lombok.extern.java.Log;
 
 /**
  * 
@@ -15,9 +22,14 @@ import com.github.chiby.player.model.RunSession;
  *
  */
 
+@Log
 @RepositoryEventHandler(RunSession.class)
 @Component
 public class RunSessionHandler {
+	@Autowired
+	DockerExecutor executor;
+	
+	
 	/**
 	 * When a new run session is created, we immediately connect it to a
 	 * Docker run. We will post docker logs outputs as log entries connected
@@ -29,14 +41,25 @@ public class RunSessionHandler {
 	 */
 	@HandleAfterCreate
 	public void connectRunSessionToExecution(RunSession runSession) {
-		
+//		try{
+//		   executor.start(runSession.getApplication(), runSession);
+//		}catch(DockerException | DockerCertificateException | InterruptedException e){
+//			runSession.setStoppedAt(new Date());
+//			runSession.setStopped(true);
+//			runSession.setRunning(false);
+//		}
 	}
 	
 	@HandleBeforeSave
 	public void interruptRunSession(RunSession runSession) {
-		if((!runSession.getRunning()) && (!runSession.getStopped())){
-//			executor.stop()
-		}
-		
+//		if((runSession.getRunning()) && (runSession.getStopped())){
+//			try{
+//			  // The run session was asked to stop running
+//			  executor.stop(runSession);
+//			}catch(DockerException | DockerCertificateException | InterruptedException e){
+//				log.log(Level.SEVERE, "Could not stop session "+runSession.uuid, e);
+//			}
+//		}
+//		
 	}
 }
