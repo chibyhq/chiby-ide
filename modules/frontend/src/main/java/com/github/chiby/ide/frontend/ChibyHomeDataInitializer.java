@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.yaml.snakeyaml.Yaml;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -29,9 +29,8 @@ import lombok.extern.java.Log;
  *
  */
 @Log
+@Component
 public class ChibyHomeDataInitializer implements ApplicationRunner {
-
-	private static final String APPLICATION_YML = ".application.yml";
 
 	@Autowired
 	ApplicationRepository applicationRepository;
@@ -46,16 +45,24 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 		// Look into each project folder for an application.yml file
 		// to deserialize
 		Path homePath = fileSystem.getPath(frontendConfig.getHome());
+		if( (!Files.isDirectory(homePath)) && frontendConfig.getInitializeHome()){
+			Files.createDirectories(homePath);
+			// TODO : Copy default resources and sample projects to the project home
+		}
+		
+		
 		if (Files.isDirectory(homePath)) {
 			Files.newDirectoryStream(fileSystem.getPath(frontendConfig.getHome()))
 					.forEach(this::findApplicationDefinition);
+		}else{
+			
 		}
 	}
 
 	private void findApplicationDefinition(Path applicationHome){
 		try{
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-			Path applicationYamlPath = applicationHome.resolve(APPLICATION_YML);
+			Path applicationYamlPath = applicationHome.resolve(ApplicationTypeConstants.APPLICATION_YML);
 			
 			Application app = mapper.readValue(Files.newInputStream(applicationYamlPath), Application.class);
 			
@@ -77,9 +84,9 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 			
 			applicationRepository.save(app);
 		}catch(InvalidPathException e){
-			log.info("Path "+applicationHome.toString()+" does not contain a "+APPLICATION_YML+" definition.");
+			log.info("Path "+applicationHome.toString()+" does not contain a "+ApplicationTypeConstants.APPLICATION_YML+" definition.");
 		} catch (IOException e) {
-			log.info("File "+applicationHome.toString()+File.separator+APPLICATION_YML+" cannot be read.");
+			log.info("File "+applicationHome.toString()+File.separator+ApplicationTypeConstants.APPLICATION_YML+" cannot be read.");
 		}
 		
 	}
