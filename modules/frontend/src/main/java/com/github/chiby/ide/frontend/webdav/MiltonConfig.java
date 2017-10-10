@@ -1,18 +1,18 @@
 package com.github.chiby.ide.frontend.webdav;
 
+import java.io.File;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import io.milton.config.HttpManagerBuilder;
 import io.milton.http.ResourceFactory;
 import io.milton.http.fs.FileSystemResourceFactory;
 import io.milton.http.fs.NullSecurityManager;
 import io.milton.http.http11.DefaultHttp11ResponseHandler;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import java.io.File;
 
 /**
  *
