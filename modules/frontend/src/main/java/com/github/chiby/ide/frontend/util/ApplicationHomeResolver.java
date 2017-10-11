@@ -11,10 +11,14 @@ import org.springframework.stereotype.Component;
 import com.github.chiby.ide.frontend.FrontendConfigProperties;
 import com.github.chiby.player.model.Application;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Component
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ApplicationHomeResolver {
 	FileSystem fileSystem = FileSystems.getDefault();
 	

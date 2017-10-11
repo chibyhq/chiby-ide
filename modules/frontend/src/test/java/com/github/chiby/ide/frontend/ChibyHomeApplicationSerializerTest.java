@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.github.chiby.ide.frontend.util.ApplicationHomeResolver;
 import com.github.chiby.player.model.Application;
 import com.github.chiby.player.model.ApplicationTypeConstants;
 import com.github.chiby.store.model.repositories.ApplicationRepository;
@@ -41,6 +42,8 @@ public class ChibyHomeApplicationSerializerTest {
 		
 		chds.fileSystem = fs;
 		chds.repository = applicationRepository;
+		chds.applicationHomeResolver = new ApplicationHomeResolver(fs, chds.config);
+		
 		
 		when(applicationRepository.findAll()).thenReturn(Arrays.asList(new Application[]{app}));
 		
