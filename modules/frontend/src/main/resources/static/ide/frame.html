@@ -6,8 +6,10 @@
     <script src="/webjars/blockly/blocks_compressed.js"></script>
     <script src="/webjars/blockly/python_compressed.js"></script>
     <script src="/webjars/blockly/msg/js/en.js"></script>
-    <script src="/webjars/blockly-pygamezero/pygamezero.blocks.js"></script>
-    <script src="/webjars/blockly-pygamezero/pygamezero.generators.js"></script>
+    <!--script src="/webjars/blockly-pygamezero/pygamezero.blocks.js"></script>
+    <script src="/webjars/blockly-pygamezero/pygamezero.generators.js"></script-->
+    <script src="blockly-pygamezero/pygamezero.blocks.js"></script>
+    <script src="blockly-pygamezero/pygamezero.generators.js"></script>
     <style>
       html, body {
         background-color: #fff;
@@ -71,6 +73,11 @@
       <category name="Animation" colour="#6d5b58">
         <block type="animate">
           <field name="OBJECT"></field>
+          <value name="DURATION"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+        </block>
+        <block type="animate_position">
+           <value name="X"><shadow type="math_number"> <field name="NUM">20</field> </shadow></value>
+           <value name="Y"><shadow type="math_number"> <field name="NUM">20</field> </shadow></value>
         </block>
       </category>
       <category name="Screen" colour="#6d5ba5">
