@@ -260,8 +260,10 @@
 						<LANG>C.UTF-8</LANG>
 					</env>
 					<runs>
+						<run>apk --update add docker iptables ca-certificates bash</run>
 						<run>mkdir -p $IDE_HOME</run>
 						<run>mkdir -p $IDE_LOGS</run>
+						<run>rm -rf /var/cache/apk/*</run>
 					</runs>
 					<workdir>$IDE_HOME</workdir>
 					<cmd>["java","-jar","${project.build.finalName}.${project.packaging}"]</cmd>

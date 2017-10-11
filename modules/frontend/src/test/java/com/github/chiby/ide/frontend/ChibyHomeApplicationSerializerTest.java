@@ -36,8 +36,8 @@ public class ChibyHomeApplicationSerializerTest {
 		Files.createDirectories(projectHome);
 		
 		Application app = Application.builder().uuid(uuid).title("App title 1").type(PYGAMEZERO).build();
-		app.setGeneratedContents("generated");
-		app.setContents("contents");
+		app.setGeneratedContents("generatedContentsForTest");
+		app.setContents("contentsForTest");
 		
 		chds.fileSystem = fs;
 		chds.repository = applicationRepository;
@@ -54,10 +54,11 @@ public class ChibyHomeApplicationSerializerTest {
 		assertTrue(Files.exists(appHome.resolve(ApplicationTypeConstants.PYTHON_APPLICATION_PY)));
 
 		// Check that the contents and generated contents are not present in the Application YAML file
+		// We do not want to persist them, as they live in their respective file for execution
 		String appYaml = new String(Files.readAllBytes(appHome.resolve(ApplicationTypeConstants.APPLICATION_YAML_FILE)));
 		
-		assertTrue(!appYaml.contains("generated"));
-		assertTrue(!appYaml.contains("contents"));
+		assertTrue(!appYaml.contains("generatedContentsForTest"));
+		assertTrue(!appYaml.contains("contentsForTest"));
 	}
 
 }

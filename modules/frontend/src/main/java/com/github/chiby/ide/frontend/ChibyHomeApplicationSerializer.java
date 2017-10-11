@@ -50,9 +50,7 @@ public class ChibyHomeApplicationSerializer {
 		if (Files.isDirectory(appHome) && Files.isWritable(appHome)) {
 			try {
 				ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-				mapper.writeValue(
-						Files.newOutputStream(appHome.resolve(ApplicationTypeConstants.APPLICATION_YAML_FILE)), app);
-
+				
 				switch (app.getType()) {
 				case PYTHON:
 				case PYGAMEZERO:
@@ -67,10 +65,17 @@ public class ChibyHomeApplicationSerializer {
 					break;
 				case DOCKER:
 				}
+				app.setGeneratedContents(null);
+				app.setContents(null);
+				
+				mapper.writeValue(
+						Files.newOutputStream(appHome.resolve(ApplicationTypeConstants.APPLICATION_YAML_FILE)), app);
 			} catch (IOException ioe) {
 				log.log(Level.WARNING, "Could not save application contents to file system", ioe);
 				return false;
 			}
+			
+			// Strip unwanted serialization parameters
 
 		}
 		return true;
