@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.github.chiby.ide.frontend.util.ApplicationHomeResolver;
 import com.github.chiby.player.model.Application;
 import com.github.chiby.player.model.ApplicationTypeConstants;
 import com.github.chiby.store.model.repositories.ApplicationRepository;
@@ -29,6 +30,9 @@ public class ChibyHomeApplicationSerializer {
 
 	@Autowired
 	FrontendConfigProperties config;
+	
+	@Autowired
+	ApplicationHomeResolver applicationHomeResolver;
 
 	FileSystem fileSystem = FileSystems.getDefault();
 
@@ -39,7 +43,7 @@ public class ChibyHomeApplicationSerializer {
 	}
 
 	public boolean persistApplication(Application app) {
-		Path appHome = fileSystem.getPath(config.getHome()).resolve(app.getUuid().toString());
+		Path appHome = applicationHomeResolver.getPathForApplication(app);
 		if (!Files.exists(appHome)) {
 			try {
 				Files.createDirectory(appHome);
