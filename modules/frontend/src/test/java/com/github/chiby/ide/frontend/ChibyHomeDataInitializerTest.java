@@ -1,6 +1,6 @@
 package com.github.chiby.ide.frontend;
 
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.util.UUID;
 
 import org.junit.Test;
+import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -52,6 +53,26 @@ public class ChibyHomeDataInitializerTest {
 		
 		verify(applicationRepository).save(app);
 		
+	}
+	/**
+	 * Simulate a simple file system containing application definition files
+	 */
+	@Test
+	public void testHomeInitialization() throws Exception {
+		ChibyHomeDataInitializer chdi = new ChibyHomeDataInitializer();
+		chdi.frontendConfig = FrontendConfigProperties.builder().home("/projects").initializeHome(true).build();
+		FileSystem fs = Jimfs.newFileSystem();
+		UUID uuid = UUID.randomUUID();
+		
+		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+		
+		chdi.fileSystem = fs;
+		chdi.applicationRepository = applicationRepository;
+		
+		chdi.run(null);
+		
+		// Check that all sample project templates are added to the home
+		verify(applicationRepository, times(2)).save((Application)any());
 	}
 
 }

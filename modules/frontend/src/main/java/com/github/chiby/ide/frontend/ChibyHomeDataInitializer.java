@@ -7,6 +7,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -41,30 +43,37 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 	FileSystem fileSystem = FileSystems.getDefault();
 
 	@Override
-	public void run(ApplicationArguments arg0) throws Exception {
+	public void run(ApplicationArguments args) throws Exception {
 		// Look into each project folder for an application.yml file
 		// to deserialize
 		Path homePath = fileSystem.getPath(frontendConfig.getHome());
-		if( (!Files.isDirectory(homePath)) && frontendConfig.getInitializeHome()){
+		if( (!Files.isDirectory(homePath)) && frontendConfig.isInitializeHome()){
 			Files.createDirectories(homePath);
-			// TODO : Copy default resources and sample projects to the project home
+			Files.newDirectoryStream(Paths.get(ClassLoader.getSystemResource("sample-projects").toURI()))
+			.forEach(this::findApplicationDefinition);
 		}
-		
-		
-		if (Files.isDirectory(homePath)) {
-			Files.newDirectoryStream(fileSystem.getPath(frontendConfig.getHome()))
-					.forEach(this::findApplicationDefinition);
-		}else{
-			
+		else{
+			if (Files.isDirectory(homePath) && Files.isReadable(homePath) && Files.isWritable(homePath)) {
+				Files.newDirectoryStream(fileSystem.getPath(frontendConfig.getHome()))
+						.forEach(this::findApplicationDefinition);
+			}else{
+				log.severe("Could not open the IDE home location '"+homePath+"' (is it writable ?)");
+			}
 		}
 	}
 
 	private void findApplicationDefinition(Path applicationHome){
 		try{
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-			Path applicationYamlPath = applicationHome.resolve(ApplicationTypeConstants.APPLICATION_YML);
+			Path applicationYamlPath = applicationHome.resolve(ApplicationTypeConstants.APPLICATION_YAML_FILE);
 			
 			Application app = mapper.readValue(Files.newInputStream(applicationYamlPath), Application.class);
+			
+			if(app.isTemplate()){
+				// Before loading the template, give it a unique UUID
+				app.setUuid(UUID.randomUUID());
+				app.setTemplate(false);
+			}
 			
 			switch(app.getType()){
 			case PYGAMEZERO:
@@ -84,9 +93,9 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 			
 			applicationRepository.save(app);
 		}catch(InvalidPathException e){
-			log.info("Path "+applicationHome.toString()+" does not contain a "+ApplicationTypeConstants.APPLICATION_YML+" definition.");
+			log.info("Path "+applicationHome.toString()+" does not contain a "+ApplicationTypeConstants.APPLICATION_YAML_FILE+" definition.");
 		} catch (IOException e) {
-			log.info("File "+applicationHome.toString()+File.separator+ApplicationTypeConstants.APPLICATION_YML+" cannot be read.");
+			log.info("File "+applicationHome.toString()+File.separator+ApplicationTypeConstants.APPLICATION_YAML_FILE+" cannot be read.");
 		}
 		
 	}

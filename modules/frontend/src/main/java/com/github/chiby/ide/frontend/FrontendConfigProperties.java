@@ -17,5 +17,5 @@ import lombok.NoArgsConstructor;
 public class FrontendConfigProperties {
 
 	String home;
-	Boolean initializeHome;
+	boolean initializeHome;
 }
