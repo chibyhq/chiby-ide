@@ -1,5 +1,6 @@
 spring.mvc.favicon.enabled: false
 spring.data.rest.base-path: /data
-chiby.ide.home: /home/bcopy/workspace/chiby/home
+chiby.ide.home: /tmp/chiby
+chiby.ide.initialize-home: true
 
 milton.filesystemroot: ${chiby.ide.home}

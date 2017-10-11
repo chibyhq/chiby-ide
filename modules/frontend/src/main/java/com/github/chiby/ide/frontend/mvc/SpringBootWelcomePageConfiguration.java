@@ -1,4 +1,4 @@
-package com.github.chiby.ide.frontend;
+package com.github.chiby.ide.frontend.mvc;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

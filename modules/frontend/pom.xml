@@ -193,6 +193,7 @@
 				</dependencies>
 				<configuration>
 					<addResources>true</addResources>
+					<executable>true</executable>
 				</configuration>
 			</plugin>
 			<plugin>

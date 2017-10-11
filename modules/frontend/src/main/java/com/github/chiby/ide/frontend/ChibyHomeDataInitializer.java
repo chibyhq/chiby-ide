@@ -47,7 +47,7 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 		// Look into each project folder for an application.yml file
 		// to deserialize
 		Path homePath = fileSystem.getPath(frontendConfig.getHome());
-		if( (!Files.isDirectory(homePath)) && frontendConfig.isInitializeHome()){
+		if( ( (!Files.exists(homePath)) || Files.list(homePath).count() == 0) && frontendConfig.isInitializeHome()){
 			Files.createDirectories(homePath);
 			Files.newDirectoryStream(Paths.get(ClassLoader.getSystemResource("sample-projects").toURI()))
 			.forEach(this::findApplicationDefinition);
