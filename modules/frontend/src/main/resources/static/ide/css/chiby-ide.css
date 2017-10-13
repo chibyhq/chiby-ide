@@ -72,6 +72,38 @@ h1 {
   float: left;
   width: 280px ;
   height: 280px;
-  background: #e6e5e4;
-  border: 2px solid #b6b5b4;
+/*  background: #FFFFFF; */
+  border: none;
+  border-radius: 4px;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.2); 
+}
+
+.panel-theme,
+.panel-primary,
+.panel-success,
+.panel-info,
+.panel-warning,
+.panel-danger {
+  background-color: #FFFFFF;
+  border: none;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.2);
+}
+.panel-theme > .panel-heading {
+  background-color: #FFFFFF;
+  border: none;
+}
+.panel-theme > .panel-heading .badge {
+  color: #FFFFFF;
+  background-color: #00000 0;
+}
+.panel-theme > .panel-heading .panel-title {
+  font-weight: bold;
+}
+.panel-theme > .panel-footer {
+  background-color: #FFFFFF;
+  border: none;
+  border-top: 1px solid #E0E0E0;
+}
+.panel-theme > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom: none;
 }

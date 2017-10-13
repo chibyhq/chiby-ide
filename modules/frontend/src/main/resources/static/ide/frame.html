@@ -8,6 +8,8 @@
     <script src="/webjars/blockly/msg/js/en.js"></script>
     <script src="/webjars/blockly-pygamezero/pygamezero.blocks.js"></script>
     <script src="/webjars/blockly-pygamezero/pygamezero.generators.js"></script>
+    <!--script src="blockly-pygamezero/pygamezero.blocks.js"></script>
+    <script src="blockly-pygamezero/pygamezero.generators.js"></script-->
     <style>
       html, body {
         background-color: #fff;
@@ -41,29 +43,22 @@
           <field name="POSY">0</field>
         </block>
         <block type="actor_image">
-          <field name="ACTOR"></field>
           <value name="IMAGE"><shadow type="text"><field name="TEXT"></field></shadow></value>
         </block>
         <block type="actor_draw">
-          <field name="ACTOR"></field>
         </block>
         <block type="get_actor_property">
           <field name="PROPERTY"></field>
-          <field name="ACTOR"></field>
         </block>
         <block type="actor_colliding">
-          <field name="ACTOR">  </field>
         </block>
         <block type="actor_colliding_rect">
-          <field name="ACTOR">  </field>
           <value name="RECTANGLE"></value>
         </block>
         <block type="actor_position_tuple">
-          <field name="ACTOR">  </field>
           <value name="POS"></value>
         </block>
         <block type="actor_position">
-          <field name="ACTOR">  </field>
           <value name="POSX"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
           <value name="POSY"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
         </block>
@@ -141,14 +136,15 @@
         <block type="on_touch_event"></block>
         <block type="on_drag_event"></block>
         <block type="get_last_touch_position"></block>
+        <block type="get_last_touch_position_property"></block>
         <block type="get_last_drag_distance"></block>
-        <block type="clock_schedule">
+        <!--block type="clock_schedule">
            <value name="DELAY"><shadow type="math_number"> <field name="NUM">0.5</field> </shadow></value>
         </block>
         <block type="clock_schedule_interval">
            <value name="INTERVAL"><shadow type="math_number"> <field name="NUM">0.5</field> </shadow></value>
         </block>
-        <block type="clock_unschedule"></block>
+        <block type="clock_unschedule"></block-->
       </category>
   
   <sep></sep>
