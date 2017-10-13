@@ -36,7 +36,7 @@
           <p class="navbar-text">Application</p>
           <ul class="nav navbar-nav">
             <li class="nav-item"><a href="#" class="nav-link" onclick="chiby.runApplication()"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Run</a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop</a></li>
+            <!--li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop</a></li-->
           </ul>
           <!--ul class="nav navbar-nav navbar-right">
             <li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-eject" aria-hidden="true"></span> Close Application</a></li>
@@ -92,12 +92,16 @@
               </div>
               <div class="modal-body">
                   <div class="form-group form-group-lg">
-                  <label for="title">Title</label>
-                  <input type="text" class="form-control" id="title" placeholder="Enter the application title">
+                  <label for="new-app-title">Title</label>
+                  <input type="text" class="form-control" id="new-app-title" maxlength="20" placeholder="Enter the application title">
+                  </div>
+                  <div class="form-group form-group-lg">
+                  <label for="new-app-description">Description</label>
+                  <input type="text" class="form-control" id="new-app-description" maxlength="40" placeholder="Enter a short description">
                   </div>
                   <div class="form-group form-group-lg">
                     <label for="avatar">Avatar</label><br/>
-                    <select title="Select an avatar" class="selectpicker show-tick show-menu-arrow" id="avatar" data-width="auto" data-show-icon="true">
+                    <select title="Select an avatar" class="selectpicker show-tick show-menu-arrow" id="new-app-avatar" data-width="auto" data-show-icon="true">
 <option data-icon="glyphicon glyphicon-apple">Apple</option>
 <option data-icon="glyphicon glyphicon-asterisk">Asterisk</option>
 <option data-icon="glyphicon glyphicon-barcode">Barcode</option>
@@ -231,7 +235,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Create application</button>
+                <button type="button" class="btn btn-primary" onclick="chiby.createNewApplication()" data-dismiss="modal">Create application</button>
               </div>
             </div>
         
@@ -303,10 +307,11 @@
               gutter: 10
             });
           
-       //   $('#panel-home').on('show.bs.collapse', function (e) {
-                chiby.refreshHome();
-        //    });
+          chiby.refreshHome();
           
+          $("#modal-new-application").on("shown.bs.modal",function(){
+              $("#new-app-title").focus();
+          });
       });
    
       
