@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.github.chiby.ide.frontend.util.ApplicationHomeResolver;
 import com.github.chiby.player.model.Application;
 import com.github.chiby.player.model.ApplicationTypeConstants;
 import com.github.chiby.store.model.repositories.ApplicationRepository;
@@ -39,6 +41,12 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 
 	@Autowired
 	FrontendConfigProperties frontendConfig;
+	
+	@Autowired
+	ChibyHomeApplicationSerializer serializer;
+	
+	@Autowired
+	ApplicationHomeResolver applicationHomeResolver;
 
 	FileSystem fileSystem = FileSystems.getDefault();
 
@@ -51,6 +59,10 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 			Files.createDirectories(homePath);
 			Files.newDirectoryStream(Paths.get(ClassLoader.getSystemResource("sample-projects").toURI()))
 			.forEach(this::findApplicationDefinition);
+			
+			if(serializer != null){
+				serializer.persistAllApplications();
+			}
 		}
 		else{
 			if (Files.isDirectory(homePath) && Files.isReadable(homePath) && Files.isWritable(homePath)) {
@@ -73,6 +85,12 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 				// Before loading the template, give it a unique UUID
 				app.setUuid(UUID.randomUUID());
 				app.setTemplate(false);
+				
+				// Copy all resources in the folder to the destination location
+				Path destination = applicationHomeResolver.getPathForApplication(app);
+				String dir = "images";
+				Files.createDirectories(destination.resolve(dir));
+				FileUtils.copyDirectory(applicationHome.resolve(dir).toFile(), destination.resolve(dir).toFile());
 			}
 			
 			switch(app.getType()){

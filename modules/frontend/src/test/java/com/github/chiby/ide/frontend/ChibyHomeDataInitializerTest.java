@@ -40,11 +40,11 @@ public class ChibyHomeDataInitializerTest {
 		Path projectHome = fs.getPath("/projects/"+uuid.toString());
 		Files.createDirectories(projectHome);
 		
-		Application app = Application.builder().uuid(uuid).title("App title 1").build();
-		app.setType(ApplicationTypeEnum.PYGAMEZERO);
+		Application app = Application.builder().uuid(uuid).title("App title 1").type(ApplicationTypeEnum.PYGAMEZERO).build();
 		
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 		mapper.writeValue(Files.newOutputStream(projectHome.resolve(ApplicationTypeConstants.APPLICATION_YAML_FILE)), app);
+		mapper.writeValue(System.out, app);
 		
 		chdi.fileSystem = fs;
 		chdi.applicationRepository = applicationRepository;
