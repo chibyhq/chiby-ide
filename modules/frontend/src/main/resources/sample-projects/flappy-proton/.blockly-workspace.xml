@@ -1,0 +1,229 @@
+
+<xml>
+    <variables>
+        <variable type="" id="[!#RTGmfINsW@HR_vpc@">proton</variable>
+        <variable type="" id="D6lS(fFg(4VSGHk{6gSR">obstacle_haut</variable>
+        <variable type="" id="_u-p:o[=BAieM{qf[5QQ">obstacle_bas</variable>
+        <variable type="" id=",FEEQ51?C2_;sm8Kyn%^">mort</variable>
+        <variable type="" id="|+$l3|aU3_epvdN7kUhN"></variable>
+        <variable type="" id="=l{S18{2cp+r?@19fC1g">vitesse</variable>
+        <variable type="" id="C[olzP+tyWlwMYYo#|Pf">delta_y</variable>
+        <variable type="" id=")K~GwC*b5yVey98g)+db">GRAVITE</variable>
+        <variable type="" id="iZ37b)AD53f,wGx%c-9|">item</variable>
+    </variables>
+    <block type="screen_size" id="oO6%pj9*e`yE[ec3`ozG" x="-12" y="-401">
+        <field name="W">800</field>
+        <field name="H">420</field>
+        <next>
+            <block type="actor" id="dt;)NNcoRjlu+.mUrQIG">
+                <field name="NAME" id="D6lS(fFg(4VSGHk{6gSR" variabletype="">obstacle_haut</field>
+                <field name="ANCHOR">bottomleft</field>
+                <field name="POSX">-100</field>
+                <field name="POSY">0</field>
+                <next>
+                    <block type="actor" id="-w9k((v@7yeP@Oww20D_">
+                        <field name="NAME" id="_u-p:o[=BAieM{qf[5QQ" variabletype="">obstacle_bas</field>
+                        <field name="ANCHOR">topleft</field>
+                        <field name="POSX">-100</field>
+                        <field name="POSY">0</field>
+                        <next>
+                            <block type="actor" id="F2Z9{p#r^=tPMMNZlf+5">
+                                <field name="NAME" id="[!#RTGmfINsW@HR_vpc@" variabletype="">proton</field>
+                                <field name="ANCHOR">center</field>
+                                <field name="POSX">240</field>
+                                <field name="POSY">200</field>
+                                <next>
+                                    <block type="variables_set" id="*cfx1^7feip/?ansEU$_">
+                                        <field name="VAR" id=",FEEQ51?C2_;sm8Kyn%^" variabletype="">mort</field>
+                                        <value name="VALUE">
+                                            <block type="logic_boolean" id="x?#ocR{}!NRqQFYZ|(Zv">
+                                                <field name="BOOL">FALSE</field>
+                                            </block>
+                                        </value>
+                                        <next>
+                                            <block type="variables_set" id="%]tMXy$8EI}q@O/S|[f+">
+                                                <field name="VAR" id="=l{S18{2cp+r?@19fC1g" variabletype="">vitesse</field>
+                                                <value name="VALUE">
+                                                    <block type="math_number" id="[+hXXpMPN+]+?6:[aL@:">
+                                                        <field name="NUM">3</field>
+                                                    </block>
+                                                </value>
+                                                <next>
+                                                    <block type="variables_set" id="icffiA_DL1FFQWCb.(,c">
+                                                        <field name="VAR" id=")K~GwC*b5yVey98g)+db" variabletype="">GRAVITE</field>
+                                                        <value name="VALUE">
+                                                            <block type="math_number" id="zqB=/ee@A$?i=i6[QqG[">
+                                                                <field name="NUM">0.3</field>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </next>
+                                            </block>
+                                        </next>
+                                    </block>
+                                </next>
+                            </block>
+                        </next>
+                    </block>
+                </next>
+            </block>
+        </next>
+    </block>
+    <block type="draw_loop" id="Ti_!mYbUDY;0irBK=`3_" x="322" y="-249">
+        <statement name="STATEMENTS">
+            <block type="screen_blit" id=",yJ4`RxpmoS7B6O8N9vV">
+                <value name="IMAGE">
+                    <shadow type="text" id="Y.|Mqvif/|N68*hHDeUQ">
+                        <field name="TEXT">tunnel</field>
+                    </shadow>
+                </value>
+                <value name="TOP">
+                    <shadow type="math_number" id="%BO:Jjj54:0^/431]_-L">
+                        <field name="NUM">0</field>
+                    </shadow>
+                </value>
+                <value name="LEFT">
+                    <shadow type="math_number" id="frJr=L]t.jB^X{/%qlGL">
+                        <field name="NUM">0</field>
+                    </shadow>
+                </value>
+                <next>
+                    <block type="actor_draw" id="M|w}%Y!ZKx8#=b7yY(!T">
+                        <field name="ACTOR" id="[!#RTGmfINsW@HR_vpc@" variabletype="">proton</field>
+                        <next>
+                            <block type="actor_draw" id="u]Z3i=Tcd[r*o$8RNz]X">
+                                <field name="ACTOR" id="_u-p:o[=BAieM{qf[5QQ" variabletype="">obstacle_bas</field>
+                                <next>
+                                    <block type="actor_draw" id="Li00DG22uFU%jOi;aLyX">
+                                        <field name="ACTOR" id="D6lS(fFg(4VSGHk{6gSR" variabletype="">obstacle_haut</field>
+                                    </block>
+                                </next>
+                            </block>
+                        </next>
+                    </block>
+                </next>
+            </block>
+        </statement>
+    </block>
+    <block type="update_loop" id="AOZ#iU$Rk|IPOx:yX1*(" x="-9" y="-183">
+        <statement name="STATEMENTS">
+            <block type="procedures_callnoreturn" id="H{/6Sf!i*,QE#02z%62n">
+                <mutation name="mettre a jour le proton"></mutation>
+                <next>
+                    <block type="procedures_callnoreturn" id="v%A2,gJH/R}sB`7Hx]-.">
+                        <mutation name="mettre a jour les obstacles"></mutation>
+                    </block>
+                </next>
+            </block>
+        </statement>
+    </block>
+    <block type="procedures_defnoreturn" id="KmVh?9)?d@*jMy|2/V8`" x="-12" y="-40">
+        <field name="NAME">mettre a jour le proton</field>
+        <comment pinned="false" h="76" w="734">Cette fonction déplace le proton et doit vérifier qu'il n'est pas entré en collision.
+Si c'est le cas, on marque le proton comme MORT et le déplace vers le bas de l'écran.</comment>
+        <statement name="STACK">
+            <block type="variables_set" id="]MDlhRT?[=7f$-a)H*Pz">
+                <field name="VAR" id="C[olzP+tyWlwMYYo#|Pf" variabletype="">delta_y</field>
+                <value name="VALUE">
+                    <block type="variables_get" id="`:Z4,gT^F;8Cp%N[bbbE">
+                        <field name="VAR" id="=l{S18{2cp+r?@19fC1g" variabletype="">vitesse</field>
+                    </block>
+                </value>
+                <next>
+                    <block type="variables_set" id="=Cit]R*2wdsnZlyYQ5-e">
+                        <field name="VAR" id="=l{S18{2cp+r?@19fC1g" variabletype="">vitesse</field>
+                        <value name="VALUE">
+                            <block type="math_arithmetic" id="%=(zntp@8l!sbQ{Z,ot4">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                    <shadow type="math_number" id="3$bBpu8$.Am{g6xW2A/h">
+                                        <field name="NUM">1</field>
+                                    </shadow>
+                                    <block type="variables_get" id="e}U_3Uly@NDW`(*b_(DU">
+                                        <field name="VAR" id="=l{S18{2cp+r?@19fC1g" variabletype="">vitesse</field>
+                                    </block>
+                                </value>
+                                <value name="B">
+                                    <shadow type="math_number" id="t;YEA#@=_4w,{I$b@1ZY">
+                                        <field name="NUM">1</field>
+                                    </shadow>
+                                    <block type="variables_get" id="*|-q,%Po(b%m[Tc$b6_8">
+                                        <field name="VAR" id=")K~GwC*b5yVey98g)+db" variabletype="">GRAVITE</field>
+                                    </block>
+                                </value>
+                            </block>
+                        </value>
+                        <next>
+                            <block type="actor_position" id="h$B4)sVRd/3ryK{?wQ3r">
+                                <field name="ACTOR" id="[!#RTGmfINsW@HR_vpc@" variabletype="">proton</field>
+                                <value name="POSX">
+                                    <shadow type="math_number" id="1o`!]NxfLSZB.SH8si]r">
+                                        <field name="NUM">200</field>
+                                    </shadow>
+                                </value>
+                                <value name="POSY">
+                                    <shadow type="math_number" id="2Y4=]z{JCC6Bd+$P,066">
+                                        <field name="NUM">0</field>
+                                    </shadow>
+                                    <block type="math_arithmetic" id="Bz|IQD$yl#|xQmd/Oy:E" inline="false">
+                                        <field name="OP">ADD</field>
+                                        <value name="A">
+                                            <shadow type="math_number" id="G,bV%Z.boo4$gXA4uWt{">
+                                                <field name="NUM">1</field>
+                                            </shadow>
+                                            <block type="get_actor_property" id="G$1Hd1-9TrW!,(k_|v8}">
+                                                <field name="PROPERTY">y</field>
+                                                <field name="ACTOR" id="[!#RTGmfINsW@HR_vpc@" variabletype="">proton</field>
+                                            </block>
+                                        </value>
+                                        <value name="B">
+                                            <shadow type="math_number" id="-Wcbyqx4?e(-]Q@9(=@W">
+                                                <field name="NUM">1</field>
+                                            </shadow>
+                                            <block type="math_arithmetic" id="2!3RE~L*IlK!RbaW:bQs">
+                                                <field name="OP">DIVIDE</field>
+                                                <value name="A">
+                                                    <shadow type="math_number" id="FHd$[E.*V${R.{5f9u`a">
+                                                        <field name="NUM">1</field>
+                                                    </shadow>
+                                                    <block type="math_arithmetic" id="M#bi2YPOu%[zZfLSo.!k">
+                                                        <field name="OP">ADD</field>
+                                                        <value name="A">
+                                                            <shadow type="math_number" id="Mlb${^d/WZ$$W/;Q!tRs">
+                                                                <field name="NUM">1</field>
+                                                            </shadow>
+                                                            <block type="variables_get" id="RfXv?LTM4LXD~5c.A:L#">
+                                                                <field name="VAR" id="C[olzP+tyWlwMYYo#|Pf" variabletype="">delta_y</field>
+                                                            </block>
+                                                        </value>
+                                                        <value name="B">
+                                                            <shadow type="math_number" id="4:LsJ{yKy!Q*~B.a/(R/">
+                                                                <field name="NUM">1</field>
+                                                            </shadow>
+                                                            <block type="variables_get" id="r]q4]Wp=5=2syuY}RL#8">
+                                                                <field name="VAR" id="=l{S18{2cp+r?@19fC1g" variabletype="">vitesse</field>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </value>
+                                                <value name="B">
+                                                    <shadow type="math_number" id="r.=i_.endL91}avqAkLW">
+                                                        <field name="NUM">2</field>
+                                                    </shadow>
+                                                </value>
+                                            </block>
+                                        </value>
+                                    </block>
+                                </value>
+                            </block>
+                        </next>
+                    </block>
+                </next>
+            </block>
+        </statement>
+    </block>
+    <block type="procedures_defnoreturn" id="Ur2/LR:Z~`NvhA80nv2N" x="-6" y="182">
+        <field name="NAME">mettre a jour les obstacles</field>
+        <comment pinned="false" h="81" w="330">Cette fonction fait avancer les tuyaux et les remets à zéro si besoin.</comment>
+    </block>
+</xml>
