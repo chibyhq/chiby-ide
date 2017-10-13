@@ -49,6 +49,10 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-rest-hal-browser</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
@@ -255,23 +259,28 @@
 						<imageTag>latest</imageTag>
 					</imageTags>
 					<env>
-						<IDE_HOME>/opt/chiby-ide</IDE_HOME>
+						<INSTALLATION_HOME>/opt/chiby-ide</INSTALLATION_HOME>
+						<CHIBY_IDE_HOME>${INSTALLATION_HOME}/applications</CHIBY_IDE_HOME>
 						<IDE_LOGS>/var/log/chiby-ide</IDE_LOGS>
 						<LANG>C.UTF-8</LANG>
+						<MIRROR>http://distrib-coffee.ipsl.jussieu.fr/pub/linux/alpine/alpine/</MIRROR>
 					</env>
 					<runs>
-						<run>apk --update add docker iptables ca-certificates bash</run>
-						<run>mkdir -p $IDE_HOME</run>
+						<!--run>apk - -update add docker iptables ca-certificates bash</run-->
+						<run>mkdir -p $INSTALLATION_HOME</run>
+						<run>mkdir -p $CHIBY_IDE_HOME</run>
+						<run>chmod -R 777 $CHIBY_IDE_HOME</run>
 						<run>mkdir -p $IDE_LOGS</run>
-						<run>rm -rf /var/cache/apk/*</run>
+						<!--run>rm -rf /var/cache/apk/*</run-->
 					</runs>
-					<workdir>$IDE_HOME</workdir>
+					<workdir>$INSTALLATION_HOME</workdir>
 					<cmd>["java","-jar","${project.build.finalName}.${project.packaging}"]</cmd>
 					<exposes>
 						<expose>8080</expose>
 					</exposes>
 					<volumes>
 						<volume>$IDE_LOGS</volume>
+						<volume>$CHIBY_IDE_HOME</volume>
 					</volumes>
 					<resources>
 						<resource>
@@ -279,7 +288,7 @@
 							<includes>
 								<include>${project.build.finalName}.${project.packaging}</include>
 							</includes>
-							<targetPath>${IDE_HOME}</targetPath>
+							<targetPath>${INSTALLATION_HOME}</targetPath>
 						</resource>
 					</resources>
 				</configuration>
