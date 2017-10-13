@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
 
 import com.github.chiby.ide.frontend.util.ApplicationHomeResolver;
 import com.github.chiby.player.PygamezeroExecutor;
+import com.github.chiby.player.model.Application;
 import com.github.chiby.player.model.RunSession;
+import com.github.chiby.store.model.repositories.ApplicationRepository;
 import com.github.chiby.store.model.repositories.RunSessionRepository;
 import com.spotify.docker.client.exceptions.DockerCertificateException;
 import com.spotify.docker.client.exceptions.DockerException;
@@ -27,6 +29,9 @@ public class RunSessionHandler {
 
 	@Autowired
 	RunSessionRepository runSessionRepository;
+	
+	@Autowired
+	ApplicationRepository applicationRepository;
 
 	@Autowired
 	ApplicationHomeResolver applicationHomeResolver;
@@ -44,11 +49,12 @@ public class RunSessionHandler {
 	 */
 	@HandleAfterCreate
 	public void connectRunSessionToExecution(RunSession runSession) {
-		switch (runSession.getApplication().getType()) {
+		Application app= applicationRepository.findOne(runSession.getApplicationUUID());
+		switch (app.getType()) {
 		case PYGAMEZERO:
 			try {
-				pgzExecutor.start(runSession.getApplication(), runSession,
-						applicationHomeResolver.getPathForApplication(runSession.getApplication()));
+				pgzExecutor.start(app, runSession,
+						applicationHomeResolver.getPathForApplication(app));
 			} catch (Exception e) {
 				runSession.setStoppedAt(new Date());
 				runSession.setStopped(true);
@@ -62,28 +68,28 @@ public class RunSessionHandler {
 			break;
 		default:
 			throw new UnsupportedOperationException(
-					"Application type " + runSession.getApplication().getType() + " is not yet supported");
+					"Application type " + app.getType() + " is not yet supported");
 		}
 
 	}
 
 	@HandleAfterSave
 	public void interruptRunSession(RunSession runSession) {
-		if ((runSession.getRunning()) && (runSession.getStopped())) {
-			switch (runSession.getApplication().getType()) {
-			case PYGAMEZERO:
-				try {
-					// The run session was asked to stop running
-					pgzExecutor.stop(runSession, true);
-				} catch (Exception e) {
-					log.log(Level.SEVERE, "Could not stop session " + runSession.uuid, e);
-				}
-				break;
-			default:
-				throw new UnsupportedOperationException(
-						"Application type " + runSession.getApplication().getType() + " is not yet supported");
-			}
-		}
+//		if ((runSession.getRunning()) && (runSession.getStopped())) {
+//			switch (runSession.getApplication().getType()) {
+//			case PYGAMEZERO:
+//				try {
+//					// The run session was asked to stop running
+//					pgzExecutor.stop(runSession, true);
+//				} catch (Exception e) {
+//					log.log(Level.SEVERE, "Could not stop session " + runSession.uuid, e);
+//				}
+//				break;
+//			default:
+//				throw new UnsupportedOperationException(
+//						"Application type " + runSession.getApplication().getType() + " is not yet supported");
+//			}
+//		}
 
 	}
 }
