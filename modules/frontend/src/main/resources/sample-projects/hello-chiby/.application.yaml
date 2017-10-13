@@ -1,5 +1,7 @@
 uuid: 02b59d51-658b-46eb-bdef-3a6aae028e64
 template: true
 title: Hello Chiby
+baseImage: chiby/pygamezero
 description: Discover block-based programming with Chiby
-type: PYGAMEZERO
+type: "PYGAMEZERO"
+avatar: education

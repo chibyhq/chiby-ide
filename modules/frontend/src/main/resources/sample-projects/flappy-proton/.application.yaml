@@ -1,5 +1,7 @@
 uuid: 581dcf5f-c14c-4d81-9720-918c118b8407
 template: true
 title: Flappy Proton
+baseImage: chiby/pygamezero
 description: Help the proton fly through the LHC and eventually get a collision !
-type: PYGAMEZERO
+type: "PYGAMEZERO"
+avatar: flash
