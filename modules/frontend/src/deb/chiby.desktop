@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Chiby IDE
+GenericName=Chiby IDE
+Comment=Integrated Development Environment for Chiby
+Exec=/opt/${deb.finalName}/${deb.finalName}.${project.packaging}
+Icon=chiby
+Categories=Development
+Terminal=false
+Type=Application

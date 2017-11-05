@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+# Install desktop shortcut to development menu
+#/usr/share/applications/chiby.desktop
+
+# Add the chiby 32x32 png icon to /usr/share/pixmaps/chiby.png
+
+#update-rc.d ${build.finalName} defaults
+#service ${build.finalName} start
+
+exit 0
