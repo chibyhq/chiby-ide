@@ -15,6 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.github.chiby.ide.frontend.util.ApplicationHomeResolver;
 import com.github.chiby.player.model.Application;
 import com.github.chiby.player.model.ApplicationTypeConstants;
 import com.github.chiby.player.model.ApplicationTypeEnum;
@@ -62,10 +63,10 @@ public class ChibyHomeDataInitializerTest {
 		ChibyHomeDataInitializer chdi = new ChibyHomeDataInitializer();
 		chdi.frontendConfig = FrontendConfigProperties.builder().home("/projects").initializeHome(true).build();
 		FileSystem fs = Jimfs.newFileSystem();
-		UUID uuid = UUID.randomUUID();
 		
-		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-		
+		chdi.applicationHomeResolver = new ApplicationHomeResolver();
+		chdi.applicationHomeResolver.setConfig(chdi.frontendConfig);
+		chdi.applicationHomeResolver.setFileSystem(fs);
 		chdi.fileSystem = fs;
 		chdi.applicationRepository = applicationRepository;
 		
