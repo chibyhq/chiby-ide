@@ -35,8 +35,9 @@
         <div class="container-fluid">
           <p class="navbar-text">Application</p>
           <ul class="nav navbar-nav">
-            <li class="nav-item"><a href="#" class="nav-link" onclick="chiby.runApplication()"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Run</a></li>
-            <!--li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop</a></li-->
+              <li class="nav-item"><a id="chiby-script-action-button" class="nav-link" href="#"><span id="chiby-script-action-icon" class="glyphicon glyphicon-play" aria-hidden="true"></span> <span class="ladda-label" id="chiby-script-action-label">Run</span></a></li>
+              <li class="nav-item"><a href="#" class="chiby-status-label">Status : <b><span id="chiby-status-label">Stopped</span></b> <span id="chiby-status-icon" class="glyphicon glyphicon-stop" aria-hidden="true"></span></a></li>
+            <!--li class="nav-item"><a href="#" class="nav-link" onclick="chiby.runApplication()"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> <span id="Run</a></li-->
           </ul>
           <!--ul class="nav navbar-nav navbar-right">
             <li class="nav-item"><a href="#" class="nav-link"><span class="glyphicon glyphicon-eject" aria-hidden="true"></span> Close Application</a></li>
@@ -50,8 +51,8 @@
               </div>
               <div class="col-sm-12 col-lg-4">
                  <ul class="nav nav-tabs" role="tablist" style="border-bottom:0px">
-                      <li class="active"><a href="#script-preview" role="tab" data-toggle="tab">Script preview</a></li>
-                      <li><a href="#console" role="tab" data-toggle="tab">Console</a></li>
+                      <li class="active"><a id="navtab-script-preview"  href="#script-preview" role="tab" data-toggle="tab">Script preview</a></li>
+                      <li><a id="navtab-console" href="#console" role="tab" data-toggle="tab">Console</a></li>
                     </ul>
                     
                  <div class="tab-content">
@@ -298,6 +299,7 @@
           $('#chiby-console-textarea').height((dim[1]-210) + "px");
           $('#chiby-script-preview-textarea').height((dim[1]-170) + "px");
           
+          $("#chiby-script-action-button").on("click", chiby.runApplication);
           
           window.clearConsole = function(){
             $("#chiby-console-textarea").text("");
