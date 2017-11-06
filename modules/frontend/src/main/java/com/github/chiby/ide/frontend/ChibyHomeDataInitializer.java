@@ -1,6 +1,5 @@
 package com.github.chiby.ide.frontend;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
@@ -9,8 +8,8 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
+import java.util.logging.Level;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -90,7 +89,7 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 				Path destination = applicationHomeResolver.getPathForApplication(app);
 				String dir = "images";
 				Files.createDirectories(destination.resolve(dir));
-				FileUtils.copyDirectory(applicationHome.resolve(dir).toFile(), destination.resolve(dir).toFile());
+				copyFolder(applicationHome.resolve(dir), destination.resolve(dir));
 			}
 			
 			switch(app.getType()){
@@ -113,9 +112,26 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 		}catch(InvalidPathException e){
 			log.info("Path "+applicationHome.toString()+" does not contain a "+ApplicationTypeConstants.APPLICATION_YAML_FILE+" definition.");
 		} catch (IOException e) {
-			log.info("File "+applicationHome.toString()+File.separator+ApplicationTypeConstants.APPLICATION_YAML_FILE+" cannot be read.");
+			log.log(Level.INFO, "I/O Exception occurred while reading application definition "+applicationHome.toString(), e);
 		}
 		
+	}
+	
+	public  static void	copyFolder( Path src, Path dest )
+	{
+	    try
+	    {   Files.walk( src ).forEach( s ->
+		        {   try	            {   Path d = dest.resolve( src.relativize(s).toString() );
+		                if( Files.isDirectory( s ) )	                {   if( !Files.exists( d ) )
+		                        Files.createDirectory( d );
+		                    return;
+		                }
+		                Files.copy( s, d );// use flag to override existing
+		            }catch( Exception e )
+		                { log.log(Level.INFO, "Exception occurred while copying application template file "+s.toString(), e); }
+		        });
+	    }catch( Exception ex )
+	        {   ex.printStackTrace(); }
 	}
 
 }
