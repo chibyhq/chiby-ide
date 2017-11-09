@@ -73,7 +73,7 @@ public class ChibyHomeDataInitializerTest {
 		chdi.run(null);
 		
 		// Check that all sample project templates are added to the home
-		verify(applicationRepository, times(2)).save((Application)any());
+		verify(applicationRepository, times(3)).save((Application)any());
 	}
 
 }
