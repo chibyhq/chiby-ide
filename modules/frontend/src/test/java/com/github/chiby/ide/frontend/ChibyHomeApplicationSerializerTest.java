@@ -1,6 +1,6 @@
 package com.github.chiby.ide.frontend;
 
-import static com.github.chiby.player.model.ApplicationTypeEnum.PYGAMEZERO;
+import static com.github.chibyhq.playar.model.ApplicationTypeEnum.PYGAMEZERO;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -17,9 +17,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.github.chiby.ide.frontend.util.ApplicationHomeResolver;
-import com.github.chiby.player.model.Application;
-import com.github.chiby.player.model.ApplicationTypeConstants;
-import com.github.chiby.store.model.repositories.ApplicationRepository;
+import com.github.chibyhq.playar.model.Application;
+import com.github.chibyhq.playar.model.ApplicationTypeConstants;
+import com.github.chibyhq.store.model.repositories.ApplicationRepository;
 import com.google.common.jimfs.Jimfs;
 
 @RunWith(MockitoJUnitRunner.class)

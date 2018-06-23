@@ -11,7 +11,8 @@ import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.stereotype.Component;
 
 import com.github.chiby.ide.frontend.ChibyHomeApplicationSerializer;
-import com.github.chiby.player.model.Application;
+import com.github.chibyhq.playar.model.Application;
+//import com.github.chibyhq.playar.model.Application;
 
 @Component
 @RepositoryEventHandler(Application.class)

@@ -1,7 +1,6 @@
 package com.github.chiby.ide.frontend.datahandlers;
 
 import java.util.Date;
-import java.util.logging.Level;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
@@ -10,11 +9,11 @@ import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.stereotype.Component;
 
 import com.github.chiby.ide.frontend.util.ApplicationHomeResolver;
-import com.github.chiby.player.PygamezeroExecutor;
-import com.github.chiby.player.model.Application;
-import com.github.chiby.player.model.RunSession;
-import com.github.chiby.store.model.repositories.ApplicationRepository;
-import com.github.chiby.store.model.repositories.RunSessionRepository;
+import com.github.chibyhq.playar.PygamezeroExecutor;
+import com.github.chibyhq.playar.model.Application;
+import com.github.chibyhq.playar.model.RunSession;
+import com.github.chibyhq.store.model.repositories.ApplicationRepository;
+import com.github.chibyhq.store.model.repositories.RunSessionRepository;
 import com.spotify.docker.client.exceptions.DockerCertificateException;
 import com.spotify.docker.client.exceptions.DockerException;
 

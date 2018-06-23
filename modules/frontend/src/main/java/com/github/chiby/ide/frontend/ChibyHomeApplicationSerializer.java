@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.github.chiby.ide.frontend.util.ApplicationHomeResolver;
-import com.github.chiby.player.model.Application;
-import com.github.chiby.player.model.ApplicationTypeConstants;
-import com.github.chiby.store.model.repositories.ApplicationRepository;
+import com.github.chibyhq.playar.model.Application;
+import com.github.chibyhq.playar.model.ApplicationTypeConstants;
+import com.github.chibyhq.store.model.repositories.ApplicationRepository;
 import com.google.common.collect.ImmutableList;
 
 import lombok.extern.java.Log;

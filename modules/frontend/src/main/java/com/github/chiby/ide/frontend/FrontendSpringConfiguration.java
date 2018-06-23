@@ -3,8 +3,8 @@ package com.github.chiby.ide.frontend;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.github.chiby.player.DockerExecutor;
-import com.github.chiby.player.PygamezeroExecutor;
+import com.github.chibyhq.playar.DockerExecutor;
+import com.github.chibyhq.playar.PygamezeroExecutor;
 
 @Configuration
 public class FrontendSpringConfiguration {

@@ -4,9 +4,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 
-import com.github.chiby.player.model.Application;
-import com.github.chiby.player.model.LogEntry;
-import com.github.chiby.player.model.RunSession;
+import com.github.chibyhq.playar.model.Application;
+import com.github.chibyhq.playar.model.LogEntry;
+import com.github.chibyhq.playar.model.RunSession;
+
 
 @Configuration
 public class ExposeEntityIdRestConfiguration extends RepositoryRestConfigurerAdapter {
