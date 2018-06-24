@@ -6,7 +6,7 @@ import org.springframework.data.map.repository.config.EnableMapRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 @SpringBootApplication
-@EnableMapRepositories("com.github.chiby.store.model.repositories")
+@EnableMapRepositories("com.github.chibyhq.store.model.repositories")
 @EnableSpringDataWebSupport
 public class FrontendApplication {
 	
