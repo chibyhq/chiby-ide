@@ -258,9 +258,6 @@
             // window-wide access to its functions.
             window.Blockly = blockly;
             
-            // Enable auto-save into browser local storage
-            //window.setTimeout(BlocklyStorage.restoreBlocks, 0);
-            //BlocklyStorage.backupOnUnload();
             
              // Add a change listener to update the generated python script
              // upon each code block change
@@ -311,6 +308,9 @@
           
           chiby.refreshHome();
           
+          $("#panel-home").on('shown.bs.collapse', function(){
+                $("#applications-grid").packery();
+            });
           $("#modal-new-application").on("shown.bs.modal",function(){
               $("#new-app-title").focus();
           });
