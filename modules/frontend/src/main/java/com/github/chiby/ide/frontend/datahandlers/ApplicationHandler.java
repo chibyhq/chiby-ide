@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.github.chiby.ide.frontend.ChibyHomeApplicationSerializer;
 import com.github.chibyhq.playar.model.Application;
-//import com.github.chibyhq.playar.model.Application;
 
 @Component
 @RepositoryEventHandler(Application.class)
