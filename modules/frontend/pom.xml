@@ -202,11 +202,15 @@
             <version>2.1.0</version>
         </dependency>
         <dependency>
-			<groupId>com.github.chiby.blockly</groupId>
-			<artifactId>blockly-pygamezero</artifactId>
-			<version>[0.1-SNAPSHOT,)</version>
-		</dependency>
-
+            <groupId>com.github.chiby.blockly</groupId>
+            <artifactId>blockly-pygamezero</artifactId>
+            <version>[0.3-SNAPSHOT,)</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.chiby.blockly</groupId>
+            <artifactId>blockly-homie</artifactId>
+            <version>[0.1-SNAPSHOT,)</version>
+        </dependency>
 		<dependency>
 			<groupId>com.github.chibyhq.playar</groupId>
 			<artifactId>repositories</artifactId>
