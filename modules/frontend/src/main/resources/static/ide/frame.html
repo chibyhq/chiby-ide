@@ -6,12 +6,22 @@
     <script src="/webjars/blockly/blocks_compressed.js"></script>
     <script src="/webjars/blockly/python_compressed.js"></script>
     <script src="/webjars/blockly/msg/js/en.js"></script>
+    
     <script src="/webjars/blockly-pygamezero/PGZ_msg_en.js"></script>
     <script src="/webjars/blockly-pygamezero/pygamezero.blocks.js"></script>
     <script src="/webjars/blockly-pygamezero/pygamezero.generators.js"></script>
+    
     <!--script src="blockly-pygamezero/PGZ_msg_en.js"></script>
     <script src="blockly-pygamezero/pygamezero.blocks.js"></script>
     <script src="blockly-pygamezero/pygamezero.generators.js"></script-->
+    
+    <script src="/webjars/blockly-homie/HOM_msg_en.js"></script>
+    <script src="/webjars/blockly-homie/homie.blocks.js"></script>
+    <script src="/webjars/blockly-homie/homie.generators.js"></script>
+    <!--script src="homie/HOM_msg_en.js"></script>
+    <script src="homie/homie.blocks.js"></script>
+    <script src="homie/homie.generators.js"></script-->
+    
     <style>
       html, body {
         background-color: #fff;
@@ -159,6 +169,15 @@
            <value name="INTERVAL"><shadow type="math_number"> <field name="NUM">0.5</field> </shadow></value>
         </block>
         <block type="clock_unschedule"></block>
+      </category>
+      
+      <category name="Messaging" colour="#40B000">
+        <block type="mqtt_connect">
+        </block>
+        <block type="mqtt_on_message">
+        </block>
+        <block type="mqtt_message_payload"></block>
+        <block type="mqtt_message_topic"></block>
       </category>
   
   <sep></sep>
