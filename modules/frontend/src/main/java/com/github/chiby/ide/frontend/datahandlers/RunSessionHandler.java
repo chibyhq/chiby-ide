@@ -1,6 +1,7 @@
 package com.github.chiby.ide.frontend.datahandlers;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
@@ -28,7 +29,7 @@ public class RunSessionHandler {
 
 	@Autowired
 	RunSessionRepository runSessionRepository;
-	
+
 	@Autowired
 	ApplicationRepository applicationRepository;
 
@@ -36,40 +37,43 @@ public class RunSessionHandler {
 	ApplicationHomeResolver applicationHomeResolver;
 
 	/**
-	 * When a new run session is created, we immediately connect it to a Docker
-	 * run. We will post docker logs outputs as log entries connected this this
-	 * run session asynchronously.
+	 * When a new run session is created, we immediately connect it to a Docker run.
+	 * We will post docker logs outputs as log entries connected this this run
+	 * session asynchronously.
 	 * 
-	 * @param runSession
-	 *            The newly created run session.
+	 * @param runSession The newly created run session.
 	 * @throws InterruptedException
 	 * @throws DockerException
 	 * @throws DockerCertificateException
 	 */
 	@HandleAfterCreate
 	public void connectRunSessionToExecution(RunSession runSession) {
-		Application app= applicationRepository.findOne(runSession.getApplicationUUID());
-		switch (app.getType()) {
-		case PYGAMEZERO:
-			try {
-				pgzExecutor.start(app, runSession,
-						applicationHomeResolver.getPathForApplication(app));
-			} catch (Exception e) {
-				runSession.setStoppedAt(new Date());
-				runSession.setStopped(true);
-				runSession.setRunning(false);
-				runSession.setStoppedAt(new Date());
-				runSession.setExitMessage(e.getMessage());
-				runSession.setExitCode(-1);
-				runSessionRepository.save(runSession);
+		Optional<Application> appCandidate = applicationRepository.findById(runSession.getApplicationUUID());
 
+		if (appCandidate.isPresent()) {
+			Application app = appCandidate.get();
+			switch (app.getType()) {
+			case PYGAMEZERO:
+				try {
+					pgzExecutor.start(app, runSession, applicationHomeResolver.getPathForApplication(app));
+				} catch (Exception e) {
+					runSession.setStoppedAt(new Date());
+					runSession.setStopped(true);
+					runSession.setRunning(false);
+					runSession.setStoppedAt(new Date());
+					runSession.setExitMessage(e.getMessage());
+					runSession.setExitCode(-1);
+					runSessionRepository.save(runSession);
+
+				}
+				break;
+			default:
+				throw new UnsupportedOperationException("Application type " + app.getType() + " is not yet supported");
 			}
-			break;
-		default:
-			throw new UnsupportedOperationException(
-					"Application type " + app.getType() + " is not yet supported");
-		}
 
+		} else {
+			log.warning(String.format("Run session {} cannot be found", runSession.getApplicationUUID()));
+		}
 	}
 
 	@HandleAfterSave
