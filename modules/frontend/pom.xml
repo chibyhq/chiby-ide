@@ -137,6 +137,12 @@
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-collections</artifactId>
 		</dependency>
+		
+		<dependency>
+	      <groupId>com.dorkbox</groupId>
+	      <artifactId>SystemTray</artifactId>
+	      <version>3.17</version>
+	    </dependency>
 
 		<dependency>
 			<groupId>org.webjars</groupId>
