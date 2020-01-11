@@ -5,7 +5,7 @@
 
 	<groupId>com.github.chiby.ide</groupId>
 	<artifactId>frontend</artifactId>
-	<version>1.2</version>
+	<version>1.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>frontend</name>
@@ -19,11 +19,11 @@
 	</parent>
 
 	<properties>
-		<base.image>openjdk:8-jdk-alpine</base.image>
+		<base.image>openjdk:11-jdk-alpine</base.image>
 		<image.name>chiby/ide</image.name>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>9</java.version>
+		<java.version>11</java.version>
 		<milton.version>2.7.2.4</milton.version>
 	</properties>
 
@@ -31,7 +31,7 @@
 	  <profile>
 	    <id>rpi3</id>
 	    <properties>
-		   <base.image>resin/raspberrypi3-alpine-openjdk:8-jdk</base.image>
+		   <base.image>resin/raspberrypi3-alpine-openjdk:11-jdk</base.image>
 		   <image.name>chiby/rpi3-ide</image.name>
 		 </properties>
       </profile>
