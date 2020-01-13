@@ -214,9 +214,9 @@
             <version>master-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.github.chiby.blockly</groupId>
+            <groupId>com.github.chibyhq</groupId>
             <artifactId>blockly-homie</artifactId>
-            <version>[0.1-SNAPSHOT,)</version>
+            <version>master-SNAPSHOT</version>
         </dependency>
 		<dependency>
 			<groupId>com.github.chibyhq.playar</groupId>
