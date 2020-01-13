@@ -209,9 +209,9 @@
             <version>2.1.0</version>
         </dependency>
         <dependency>
-            <groupId>com.github.chiby.blockly</groupId>
+            <groupId>com.github.chibyhq</groupId>
             <artifactId>blockly-pygamezero</artifactId>
-            <version>[master-SNAPSHOT,)</version>
+            <version>master-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.github.chiby.blockly</groupId>
