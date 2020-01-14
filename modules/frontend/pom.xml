@@ -1,202 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.github.chiby.ide</groupId>
-	<artifactId>frontend</artifactId>
-	<version>1.2</version>
-	<packaging>jar</packaging>
-
-	<name>frontend</name>
-	<description>Web frontend for Chiby IDE</description>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.3.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
-
-	<properties>
-		<base.image>openjdk:8-jdk-alpine</base.image>
-		<image.name>chiby/ide</image.name>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>9</java.version>
-		<milton.version>2.7.2.4</milton.version>
-	</properties>
-
-	<profiles>
-	  <profile>
-	    <id>rpi3</id>
-	    <properties>
-		   <base.image>resin/raspberrypi3-alpine-openjdk:8-jdk</base.image>
-		   <image.name>chiby/rpi3-ide</image.name>
-		 </properties>
-      </profile>
-	  <profile>
-	    <id>gitlab-x64</id>
-	    <properties>
-		   <image.name>gitlab-registry.cern.ch/chiby-hq/images/ide</image.name>
-		 </properties>
-      </profile>
-      <profile>
-        <id>deb</id>
-        <properties>
-          <deb.finalName>chiby</deb.finalName>  
-        </properties>
-        <build>
-           <resources>
-              <resource>
-                <!--targetPath>${project.build.directory}/deb</targetPath-->
-                <directory>${project.basedir}/src/deb</directory>
-                <filtering>true</filtering>
-              </resource>
-           </resources>
-
-            <plugins>
-                <plugin>
-                    <artifactId>jdeb</artifactId>
-                    <groupId>org.vafer</groupId>
-                    <version>1.5</version>
-                    <configuration>
-                        <verbose>true</verbose>
-                        <controlDir>${project.basedir}/src/deb/control</controlDir>
-                        <deb>${project.build.directory}/${deb.finalName}.deb</deb>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals> <goal>jdeb</goal> </goals>
-                            <configuration>
-                                <dataSet>
-                                    <data>
-                                        <src>${project.build.directory}/${project.build.finalName}.${project.packaging}</src>
-                                        <type>file</type>
-                                        <mapper>
-                                            <type>perm</type>
-                                            <prefix>/opt/${deb.finalName}</prefix>
-                                            <filemode>755</filemode>
-                                        </mapper>
-                                    </data>
-                                    <data>
-                                        <src>${project.basedir}/src/deb/chiby.desktop</src>
-                                        <type>file</type>
-                                        <mapper>
-                                            <type>perm</type>
-                                            <prefix>/usr/share/applications</prefix>
-                                            <filemode>755</filemode>
-                                        </mapper>
-                                    </data>
-                                    <data>
-                                        <src>${project.basedir}/src/deb/chiby.png</src>
-                                        <type>file</type>
-                                        <mapper>
-                                            <type>perm</type>
-                                            <prefix>/usr/share/pixmaps</prefix>
-                                            <filemode>644</filemode>
-                                        </mapper>
-                                    </data>
-                                </dataSet>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-               
-            </plugins>
-        </build>
-      </profile>
-	</profiles>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 	
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
+    <groupId>com.github.chibyhq</groupId>
+    <artifactId>ide-frontend</artifactId>
+    <version>1.3-SNAPSHOT</version>
+    <packaging>jar</packaging>
+	
+    <name>Chiby IDE :: frontend</name>
+    <description>Chiby IDE :: Web frontend for Chiby IDE</description>
+	
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.3.RELEASE</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+	
+    <properties>
+        <base.image>openjdk:11-jdk-alpine</base.image>
+        <image.name>chiby/ide</image.name>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>11</java.version>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        
+        <milton.version>2.7.2.4</milton.version>
+        
+        <blockly.pygamezero.version>0.3-SNAPSHOT</blockly.pygamezero.version>
+        <blockly.homie.version>0.1-SNAPSHOT</blockly.homie.version>
+        <playar.version>0.4-SNAPSHOT</playar.version>
+    </properties>
+	
+    <profiles>
+        <profile>
+          <id>jitpack-latest</id>
+          <properties>
+            <blockly.pygamezero.version>master-SNAPSHOT</blockly.pygamezero.version>
+            <blockly.homie.version>master-SNAPSHOT</blockly.homie.version>
+            <playar.version>master-SNAPSHOT</playar.version>
+          </properties>
+        </profile>
+        <profile>
+            <id>rpi3</id>
+            <properties>
+                <base.image>resin/raspberrypi3-alpine-openjdk:11-jdk</base.image>
+                <image.name>chiby/rpi3-ide</image.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>gitlab-x64</id>
+            <properties>
+                <image.name>gitlab-registry.cern.ch/chiby-hq/images/ide</image.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>deb</id>
+            <properties>
+                <deb.finalName>chiby</deb.finalName>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                <!--targetPath>${project.build.directory}/deb</targetPath-->
+                        <directory>${project.basedir}/src/deb</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+				
+                <plugins>
+                    <plugin>
+                        <artifactId>jdeb</artifactId>
+                        <groupId>org.vafer</groupId>
+                        <version>1.5</version>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <controlDir>${project.basedir}/src/deb/control</controlDir>
+                            <deb>${project.build.directory}/${deb.finalName}.deb</deb>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jdeb</goal>
+                                </goals>
+                                <configuration>
+                                    <dataSet>
+                                        <data>
+                                            <src>${project.build.directory}/${project.build.finalName}.${project.packaging}</src>
+                                            <type>file</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/opt/${deb.finalName}</prefix>
+                                                <filemode>755</filemode>
+                                            </mapper>
+                                        </data>
+                                        <data>
+                                            <src>${project.basedir}/src/deb/chiby.desktop</src>
+                                            <type>file</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/usr/share/applications</prefix>
+                                                <filemode>755</filemode>
+                                            </mapper>
+                                        </data>
+                                        <data>
+                                            <src>${project.basedir}/src/deb/chiby.png</src>
+                                            <type>file</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/usr/share/pixmaps</prefix>
+                                                <filemode>644</filemode>
+                                            </mapper>
+                                        </data>
+                                    </dataSet>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+				
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+	
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+		
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-rest-hal-browser</artifactId>
         </dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-rest</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-keyvalue</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.querydsl</groupId>
-			<artifactId>querydsl-collections</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
 		
-		<dependency>
-	      <groupId>com.dorkbox</groupId>
-	      <artifactId>SystemTray</artifactId>
-	      <version>3.17</version>
-	    </dependency>
-
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>webjars-locator</artifactId>
-			<version>0.36</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.milton</groupId>
-			<artifactId>milton-server-ce</artifactId>
-			<version>${milton.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.servlet</groupId>
-					<artifactId>servlet-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.7-1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
-			<version>3.2.1</version>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-keyvalue</artifactId>
+        </dependency>
+		
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-collections</artifactId>
+        </dependency>
+		
+        <dependency>
+            <groupId>com.dorkbox</groupId>
+            <artifactId>SystemTray</artifactId>
+            <version>3.17</version>
+        </dependency>
+		
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>0.36</version>
+        </dependency>
+		
+        <dependency>
+            <groupId>io.milton</groupId>
+            <artifactId>milton-server-ce</artifactId>
+            <version>${milton.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+		
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.3.7-1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.2.1</version>
+        </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>qunit</artifactId>
             <version>2.1.0</version>
         </dependency>
         <dependency>
-		    <groupId>org.webjars.npm</groupId>
-		    <artifactId>hybind</artifactId>
-		    <version>1.4.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>blockly</artifactId>
-			<version>fdb2698d000</version>
-		</dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>hybind</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>blockly</artifactId>
+            <version>fdb2698d000</version>
+        </dependency>
         <dependency>
             <groupId>org.webjars.bower</groupId>
             <artifactId>bootstrap-select</artifactId>
             <version>1.12.4</version>
             <exclusions>
-				<exclusion>
-					<groupId>org.webjars.bower</groupId>
-					<artifactId>jquery</artifactId>
-				</exclusion>
-			</exclusions>
+                <exclusion>
+                    <groupId>org.webjars.bower</groupId>
+                    <artifactId>jquery</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
@@ -211,115 +227,135 @@
         <dependency>
             <groupId>com.github.chibyhq</groupId>
             <artifactId>blockly-pygamezero</artifactId>
-            <version>master-SNAPSHOT</version>
+            <version>${blockly.pygamezero.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.chibyhq</groupId>
             <artifactId>blockly-homie</artifactId>
-            <version>master-SNAPSHOT</version>
+            <version>${blockly.homie.version}</version>
         </dependency>
-		<dependency>
-			<groupId>com.github.chibyhq.playar</groupId>
-			<artifactId>repositories</artifactId>
-			<version>[0.1-SNAPSHOT,)</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.chibyhq.playar</groupId>
-			<artifactId>client</artifactId>
-			<version>[0.1-SNAPSHOT,)</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>com.vaadin.external.google</groupId>
-					<artifactId>android-json</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-yaml</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.google.jimfs</groupId>
-			<artifactId>jimfs</artifactId>
-			<version>1.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<build>
+        <dependency>
+            <groupId>com.github.chibyhq.playar</groupId>
+            <artifactId>playar-repositories</artifactId>
+            <version>${playar.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.chibyhq.playar</groupId>
+            <artifactId>playar-client</artifactId>
+            <version>${playar.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin.external.google</groupId>
+                    <artifactId>android-json</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.jimfs</groupId>
+            <artifactId>jimfs</artifactId>
+            <version>1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+	
+    <build>
         <extensions>
             <extension>
                 <groupId>org.vafer</groupId>
                 <artifactId>jdeb</artifactId>
             </extension>
         </extensions>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<dependencies>
-					<dependency>
-						<groupId>org.springframework</groupId>
-						<artifactId>springloaded</artifactId>
-						<version>1.2.6.RELEASE</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<addResources>true</addResources>
-					<executable>true</executable>
-					<embeddedLaunchScriptProperties>
-					</embeddedLaunchScriptProperties>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.jamesward</groupId>
-				<artifactId>unsnapshot-maven-plugin</artifactId>
-				<version>0.2</version>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>unsnapshot</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>io.reformanda.semper</groupId>
-				<artifactId>dependencyversion-maven-plugin</artifactId>
-				<version>1.0.0</version>
-				<executions>
-					<execution>
-						<id>set-all</id>
-						<goals>
-							<goal>set-version</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>com.amashchenko.maven.plugin</groupId>
-				<artifactId>gitflow-maven-plugin</artifactId>
-				<version>1.11.0</version>
-			</plugin>
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.4.13</version>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>1.2.6.RELEASE</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <addResources>true</addResources>
+                    <executable>true</executable>
+                    <embeddedLaunchScriptProperties></embeddedLaunchScriptProperties>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.jamesward</groupId>
+                <artifactId>unsnapshot-maven-plugin</artifactId>
+                <version>0.2</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>unsnapshot</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.reformanda.semper</groupId>
+                <artifactId>dependencyversion-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <id>set-all</id>
+                        <goals>
+                            <goal>set-version</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--plugin>
+                <groupId>ro.isdc.wro4j</groupId>
+                <artifactId>wro4j-maven-plugin</artifactId>
+                <version>1.8.0</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <wroFile>${basedir}/src/main/resources/static/WEB-INF/wro.xml</wroFile>
+                    <contextFolder>${basedir}/src/main/resources/static</contextFolder>
+                    <destinationFolder>${basedir}/src/main/webapp/</destinationFolder>
+                    <ignoreMissingResources>false</ignoreMissingResources>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.mockito</groupId>
+                        <artifactId>mockito-core</artifactId>
+                        <version>2.18.0</version>
+                    </dependency>
+                </dependencies>
+                </plugin-->
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>0.4.13</version>
 				<!--executions>
 					<execution>
 						<id>build-image</id>
@@ -339,61 +375,61 @@
 						</configuration>
 					</execution>
 				</executions-->
-				<configuration>
-					<imageName>${image.name}</imageName>
-					<baseImage>${base.image}</baseImage>
-					<forceTags>true</forceTags>
-					<useConfigFile>true</useConfigFile>
-					<imageTags>
-						<imageTag>${project.version}</imageTag>
-						<imageTag>latest</imageTag>
-					</imageTags>
-					<env>
-						<INSTALLATION_HOME>/opt/chiby-ide</INSTALLATION_HOME>
-						<CHIBY_IDE_HOME>${INSTALLATION_HOME}/applications</CHIBY_IDE_HOME>
-						<IDE_LOGS>/var/log/chiby-ide</IDE_LOGS>
-						<LANG>C.UTF-8</LANG>
-						<MIRROR>http://distrib-coffee.ipsl.jussieu.fr/pub/linux/alpine/alpine/</MIRROR>
-					</env>
-					<runs>
+                    <configuration>
+                        <imageName>${image.name}</imageName>
+                        <baseImage>${base.image}</baseImage>
+                        <forceTags>true</forceTags>
+                        <useConfigFile>true</useConfigFile>
+                        <imageTags>
+                            <imageTag>${project.version}</imageTag>
+                            <imageTag>latest</imageTag>
+                        </imageTags>
+                        <env>
+                            <INSTALLATION_HOME>/opt/chiby-ide</INSTALLATION_HOME>
+                            <CHIBY_IDE_HOME>${INSTALLATION_HOME}/applications</CHIBY_IDE_HOME>
+                            <IDE_LOGS>/var/log/chiby-ide</IDE_LOGS>
+                            <LANG>C.UTF-8</LANG>
+                            <MIRROR>http://distrib-coffee.ipsl.jussieu.fr/pub/linux/alpine/alpine/</MIRROR>
+                        </env>
+                        <runs>
 						<!--run>apk - -update add docker iptables ca-certificates bash</run-->
-						<run>mkdir -p $INSTALLATION_HOME</run>
-						<run>mkdir -p $CHIBY_IDE_HOME</run>
-						<run>chmod -R 777 $CHIBY_IDE_HOME</run>
-						<run>mkdir -p $IDE_LOGS</run>
+                            <run>mkdir -p $INSTALLATION_HOME</run>
+                            <run>mkdir -p $CHIBY_IDE_HOME</run>
+                            <run>chmod -R 777 $CHIBY_IDE_HOME</run>
+                            <run>mkdir -p $IDE_LOGS</run>
 						<!--run>rm -rf /var/cache/apk/*</run-->
-					</runs>
-					<workdir>$INSTALLATION_HOME</workdir>
-					<cmd>["java","-jar","${project.build.finalName}.${project.packaging}"]</cmd>
-					<exposes>
-						<expose>8080</expose>
-					</exposes>
-					<volumes>
-						<volume>$IDE_LOGS</volume>
-						<volume>$CHIBY_IDE_HOME</volume>
-					</volumes>
-					<resources>
-						<resource>
-							<directory>${project.build.directory}</directory>
-							<includes>
-								<include>${project.build.finalName}.${project.packaging}</include>
-							</includes>
-							<targetPath>${INSTALLATION_HOME}</targetPath>
-						</resource>
-					</resources>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
-	<repositories>
-		<repository>
-			<id>milton-repo</id>
-			<url>http://dl.bintray.com/milton/Milton</url>
-		</repository>
-                <repository>
-                    <id>jitpack.io</id>
-                    <url>https://jitpack.io</url>
-                </repository>
-	</repositories>
-</project>
+                        </runs>
+                        <workdir>$INSTALLATION_HOME</workdir>
+                        <cmd>["java","-jar","${project.build.finalName}.${project.packaging}"]</cmd>
+                        <exposes>
+                            <expose>8080</expose>
+                        </exposes>
+                        <volumes>
+                            <volume>$IDE_LOGS</volume>
+                            <volume>$CHIBY_IDE_HOME</volume>
+                        </volumes>
+                        <resources>
+                            <resource>
+                                <directory>${project.build.directory}</directory>
+                                <includes>
+                                    <include>${project.build.finalName}.${project.packaging}</include>
+                                </includes>
+                                <targetPath>${INSTALLATION_HOME}</targetPath>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+		
+        <repositories>
+            <repository>
+                <id>milton-repo</id>
+                <url>http://dl.bintray.com/milton/Milton</url>
+            </repository>
+            <repository>
+                <id>jitpack.io</id>
+                <url>https://jitpack.io</url>
+            </repository>
+        </repositories>
+    </project>
