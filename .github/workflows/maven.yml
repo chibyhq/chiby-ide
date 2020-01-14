@@ -1,9 +1,10 @@
 name: Java CI
 
+on: [push]
+
 jobs:
   build-latest-snapshots:
     if: contains(github.ref, 'development')
-
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -16,7 +17,6 @@ jobs:
 
   build-stable:
     if: (! contains(github.ref, 'development') )
-
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
