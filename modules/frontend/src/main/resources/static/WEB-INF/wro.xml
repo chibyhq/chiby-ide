@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups xmlns="http://www.isdc.ro/wro"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+
+  <group name="all">
+    <css>webjar:bootstrap.css</css>
+    <css>webjar:bootstrap-select.css</css>
+    <css>/ide/css/chiby-ide.css</css>
+    <!--js>webjar:jquery/jquery.js</js-->
+    <js>classpath:META-INF/resources/webjars/jquery/3.2.1/jquery.js</js>
+    <js>webjar:bootstrap.js</js>
+    <js>classpath:META-INF/resources/webjars/bootstrap-select/1.12.4/js/bootstrap-select.js</js>
+    <js>webjar:packery.pkgd.js</js>
+    <js>classpath:META-INF/resources/webjars/hybind/1.4.3/index.js</js>
+    <js>/ide/js/chiby-ide.service.js</js>                          
+  </group>
+
+
+</groups>
