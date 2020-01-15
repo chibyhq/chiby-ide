@@ -28,8 +28,8 @@
         
         <milton.version>2.7.2.4</milton.version>
         
-        <blockly.pygamezero.version>0.3-SNAPSHOT</blockly.pygamezero.version>
-        <blockly.homie.version>0.1-SNAPSHOT</blockly.homie.version>
+        <blockly.pygamezero.version>[0.3,)</blockly.pygamezero.version>
+        <blockly.homie.version>[0.1,)</blockly.homie.version>
         <playar.version>[0.5.4,)</playar.version>
     </properties>
 	
@@ -37,9 +37,9 @@
         <profile>
           <id>jitpack-latest</id>
           <properties>
-            <blockly.pygamezero.version>master-SNAPSHOT</blockly.pygamezero.version>
-            <blockly.homie.version>master-SNAPSHOT</blockly.homie.version>
-            <playar.version>master-SNAPSHOT</playar.version>
+            <blockly.pygamezero.version>develop-SNAPSHOT</blockly.pygamezero.version>
+            <blockly.homie.version>develop-SNAPSHOT</blockly.homie.version>
+            <playar.version>develop-SNAPSHOT</playar.version>
           </properties>
         </profile>
         <profile>
