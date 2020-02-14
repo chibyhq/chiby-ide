@@ -23,6 +23,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        
         <milton.version>2.7.2.4</milton.version>
         
         <blockly.pygamezero.version>0.3-SNAPSHOT</blockly.pygamezero.version>
@@ -36,7 +39,7 @@
           <properties>
             <blockly.pygamezero.version>master-SNAPSHOT</blockly.pygamezero.version>
             <blockly.homie.version>master-SNAPSHOT</blockly.homie.version>
-            <playar.version>master-SNAPSHOT</playar.version>
+            <!--playar.version>master-SNAPSHOT</playar.version-->
           </properties>
         </profile>
         <profile>
@@ -232,12 +235,12 @@
             <version>${blockly.homie.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.chibyhq</groupId>
+            <groupId>com.github.chibyhq.playar</groupId>
             <artifactId>playar-repositories</artifactId>
             <version>${playar.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.chibyhq</groupId>
+            <groupId>com.github.chibyhq.playar</groupId>
             <artifactId>playar-client</artifactId>
             <version>${playar.version}</version>
         </dependency>
@@ -323,7 +326,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+            <!--plugin>
                 <groupId>ro.isdc.wro4j</groupId>
                 <artifactId>wro4j-maven-plugin</artifactId>
                 <version>1.9.0</version>
@@ -348,7 +351,7 @@
                         <version>2.18.0</version>
                     </dependency>
                 </dependencies>
-                </plugin>
+                </plugin-->
                 <plugin>
                     <groupId>com.spotify</groupId>
                     <artifactId>docker-maven-plugin</artifactId>

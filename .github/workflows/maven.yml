@@ -1,9 +1,9 @@
 name: Java CI
 
+on: [push]
+
 jobs:
   build-latest-snapshots:
-    if: contains(github.ref, 'development')
-
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -15,8 +15,7 @@ jobs:
       run: mvn -P jitpack-latest -B package -DskipTests=true --file pom.xml
 
   build-stable:
-    if: (! contains(github.ref, 'development') )
-
+    if: contains(github.ref, 'master') || (contains(github.ref, 'release') ) || (contains(github.ref, 'support') )
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
