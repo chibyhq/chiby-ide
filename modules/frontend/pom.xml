@@ -30,7 +30,7 @@
         
         <blockly.pygamezero.version>0.3-SNAPSHOT</blockly.pygamezero.version>
         <blockly.homie.version>0.1-SNAPSHOT</blockly.homie.version>
-        <playar.version>0.4-SNAPSHOT</playar.version>
+        <playar.version>[0.4-SNAPSHOT,)</playar.version>
     </properties>
 	
     <profiles>
