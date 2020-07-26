@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="blocklyDiv" ref="blocklyDiv">
+    <div class="blocklyDiv" v-bind:style="styleObject" ref="blocklyDiv">
     </div>
     <xml ref="blocklyToolbox" style="display:none">
       <slot></slot>
@@ -42,6 +42,17 @@ export default {
       workspace: null
     }
   },
+  computed: {
+      dynWidth: function(){ return '80vh'; }
+     ,dynHeight: function(){ return '80vh'; }
+     ,styleObject: function() {
+         return{
+          height: this.dynHeight,
+          width: this.dynWidth,
+          "text-align": 'left'
+         }
+      }
+  },
   mounted() {
     var options = this.$props.options || {};
     if (!options.toolbox) {
@@ -54,9 +65,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.blocklyDiv {
-  height: 100%;
-  width: 100%;
-  text-align: left;
-}
+
+.blocklySvg {
+        height: 100%;
+        width:100%;
+      }
 </style>
