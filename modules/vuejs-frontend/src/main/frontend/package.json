@@ -1,16 +1,24 @@
 {
   "name": "chiby-ide",
+  "license": "gplv3",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "update": "npm update",
+    "start": "npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "blockly": "^3.20200123.1",
     "bootstrap-vue": "^2.15.0",
     "core-js": "^3.6.5",
+    "golden-layout": "^1.5.9",
     "vue": "^2.6.11",
+    "vue-class-component": "^7.2.5",
+    "vue-golden-layout": "^2.0.10",
+    "vue-property-decorator": "^9.0.0",
     "vue-router": "^3.3.4",
     "vue-split-grid": "^0.8.0",
     "vuex": "^3.4.0"
@@ -22,7 +30,8 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "copy-webpack-plugin": "^5.1.1"
   },
   "eslintConfig": {
     "root": true,
@@ -44,5 +53,5 @@
     "not dead"
   ],
   "_id": "chiby-ide@0.1.0",
-  "readme": "ERROR: No README data found!"
+  "readme": "README.md"
 }
