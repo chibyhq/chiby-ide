@@ -32,7 +32,6 @@ import Vue from 'vue'
 
 import BlocklyJS from 'blockly/javascript';
 
-//import { SplitGrid, SplitGridArea, SplitGridGutter } from 'vue-split-grid';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import vgl from 'vue-golden-layout'
 
@@ -52,10 +51,7 @@ import BlocklyComponent from './components/BlocklyComponent.vue'
 export default {
   name: 'app',
   components: {
-    BlocklyComponent,
- //   SplitGrid,
- //   SplitGridArea,
- //   SplitGridGutter
+    BlocklyComponent
   },
   data(){
     return {
