@@ -7,7 +7,8 @@ module.exports = {
     port: 3000
   },
   configureWebpack: {
-    plugins: [
+    devtool: 'source-map'
+   ,plugins: [
       // Copy over media resources from the Blockly package
       new CopyPlugin([
         {
