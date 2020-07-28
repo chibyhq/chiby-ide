@@ -1,12 +1,10 @@
 <template>
   <b-container>
-    <golden-layout id="gl-top" borderWidth="12" :showMaximiseIcon="false" :showPopoutIcon="false">
+    <golden-layout id="gl-top" :showMaximiseIcon="false" :showPopoutIcon="false">
       <gl-row>
         <gl-row>
              <gl-component width="80" ref="blocklyContainer" title="Blockly" @resize="goldenLayoutResizeHandler" :showMaximiseIcon="false" :closable="false" :reorder-enabled="false">
-                  <div id="blocklyArea"  ref="editorArea">  
-                    <!-- v-bind:style="styleObject" -->
-                  </div>
+                  <div ref="editorArea"> </div>
               </gl-component>
               <gl-stack :closable="false">
               <gl-component width="20" :closable="false" title="Code">
@@ -31,9 +29,6 @@
 <script>
 import Vue from 'vue'
 import Blockly from 'blockly';
-//import VueLodash from 'vue-lodash'
-//import lodash from 'lodash'
-//Vue.use(VueLodash, { lodash: { lodash } })
 
 import vgl from 'vue-golden-layout'
 Vue.use(vgl);
@@ -46,24 +41,12 @@ export default {
   data(){
     return {
       code: '',
-      workspace: null,
+      blocklyWorkspace: null,
       blocklyInstance: null,
       options: {
         media: 'media/',
-        grid:
-          {
-            spacing: 25,
-            length: 3,
-            colour: '#ccc',
-            snap: true
-          },
-        zoom:
-            {controls: true,
-            wheel: true,
-            startScale: 1.0,
-            maxScale: 3,
-            minScale: 0.3,
-            scaleSpeed: 1.2},
+        grid: { spacing: 25, length: 3, colour: '#ccc', snap: true },
+        zoom: {controls: true, wheel: true, startScale: 1.0, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2},
         toolbox:
         `<xml>
           <category name="Logic" colour="%{BKY_LOGIC_HUE}">
@@ -101,18 +84,12 @@ export default {
       }
     }
   },
-  computed: {
-     styleObject: function() {
-         return{
-          height: this.dynHeight,
-          width: this.dynWidth,
-          "text-align": 'left'
-         }
-      }
-  },
   methods: {
-      goldenLayoutResizeHandler(e) {
-         if(e) console.log(e,  this.workspace, this.blocklyInstance);
+    showCode() {
+      this.code = this.blocklyInstance.workspaceToCode(this.blocklyWorkspace);
+    },
+    goldenLayoutResizeHandler(e) {
+         if(e) console.log(e,  this.blocklyWorkspace, this.blocklyInstance);
          var blocklyArea = this.$refs['editorArea'];
          blocklyArea.height = this.$el.offsetHeight;
 
@@ -130,12 +107,12 @@ export default {
          blocklyDiv.style.top = y + 'px';
          blocklyDiv.style.width = (blocklyArea.offsetWidth+2) + 'px';
          blocklyDiv.style.height = ((blocklyArea.offsetHeight?blocklyArea.offsetHeight:blocklyArea.height)-20) + 'px';
-         this.blocklyInstance.svgResize(this.workspace);
+         this.blocklyInstance.svgResize(this.blocklyWorkspace);
      },
   },
   mounted() {
     console.log('mounting Chiby Blockly editor')
-    this.workspace = Blockly.inject(this.$refs['editor'],this.options);
+    this.blocklyWorkspace = Blockly.inject(this.$refs['editor'],this.options);
     this.blocklyInstance = Blockly;
     console.log('mounted Chiby Blockly editor')
     
@@ -146,15 +123,8 @@ export default {
 </script>
 
 <style scoped>
-#blocklyArea {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
 
 #gl-top {
  height: 85vh;
 }      
-      
 </style>
