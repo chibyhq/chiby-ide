@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -10,29 +11,48 @@
 
 	<name>Chiby IDE reactor project</name>
 	<description>${project.name}</description>
-    
+
 	<modules>
-	  <module>modules/frontend</module>
+		<module>modules/frontend</module>
 	</modules>
-    
+
 	<build>
-	  <plugins>
-	    <plugin>
-           <groupId>com.amashchenko.maven.plugin</groupId>
-           <artifactId>gitflow-maven-plugin</artifactId>
-           <version>1.11.0</version>
-		</plugin>
-		<plugin>
-           <groupId>org.codehaus.mojo</groupId>
-           <artifactId>versions-maven-plugin</artifactId>
-           <version>2.5</version>
-           <configuration>
-             <generateBackupPoms>false</generateBackupPoms>
-             <processParent>true</processParent>
-             <processAllModules>true</processAllModules>
-           </configuration>
-		</plugin>
-     </plugins>
-   </build>
+		<plugins>
+			<plugin>
+				<groupId>com.amashchenko.maven.plugin</groupId>
+				<artifactId>gitflow-maven-plugin</artifactId>
+				<version>1.11.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<generateBackupPoms>false</generateBackupPoms>
+					<processParent>true</processParent>
+					<processAllModules>true</processAllModules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>github</id>
+			<repositories>
+				<repository>
+					<id>central</id>
+					<url>https://repo1.maven.org/maven2</url>
+				</repository>
+				<repository>
+					<id>github</id>
+					<url>https://maven.pkg.github.com/chibyhq/chiby-ide</url>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
 
 </project>
