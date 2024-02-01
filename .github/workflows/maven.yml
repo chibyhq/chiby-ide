@@ -11,6 +11,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: 11
+        distribution: temurin
     - uses: actions/cache@v1
       with:
         path: ~/.m2/repository
@@ -29,5 +30,6 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: 11
+        distribution: temurin
     - name: Build with Maven
       run: mvn -B package -DskipTests=true --file pom.xml
