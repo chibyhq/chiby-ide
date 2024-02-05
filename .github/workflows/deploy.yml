@@ -1,6 +1,6 @@
 name: Deploy package to GitHub Packages
 
-on: [workflow_dispatch]
+on: workflow_dispatch
 
 jobs:
   deploy:
