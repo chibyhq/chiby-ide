@@ -37,20 +37,37 @@
 
     <profiles>
         <profile>
-            <id>jitpack-latest</id>
-            <properties>
-                <blockly.pygamezero.version>develop-SNAPSHOT</blockly.pygamezero.version>
-                <blockly.homie.version>develop-SNAPSHOT</blockly.homie.version>
-                <playar.version>develop-SNAPSHOT</playar.version>
-            </properties>
-        </profile>
-        <profile>
             <id>rpi3</id>
             <properties>
                 <base.image>resin/raspberrypi3-alpine-openjdk:11-jdk</base.image>
                 <image.name>chiby/rpi3-ide</image.name>
             </properties>
         </profile>
+        <profile>
+			<id>github</id>
+			
+			<distributionManagement>
+				<repository>
+					<id>github</id>
+					<name>GitHub Packages</name>
+					<url>https://maven.pkg.github.com/chibyhq/chiby-ide</url>
+				</repository>
+			</distributionManagement>
+		
+			<repositories>
+				<repository>
+					<id>central</id>
+					<url>https://repo1.maven.org/maven2</url>
+				</repository>
+				<repository>
+					<id>github</id>
+					<url>https://maven.pkg.github.com/chibyhq/chiby-ide</url>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
         <profile>
             <id>gitlab-x64</id>
             <properties>
@@ -508,15 +525,6 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/chibyhq/chiby-ide</url>
-        </repository>
-    </distributionManagement>
-
     <repositories>
         <repository>
             <id>milton-repo</id>
@@ -527,4 +535,5 @@
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
+
 </project>

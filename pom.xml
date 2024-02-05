@@ -39,6 +39,15 @@
 	<profiles>
 		<profile>
 			<id>github</id>
+			
+			<distributionManagement>
+				<repository>
+					<id>github</id>
+					<name>GitHub Packages</name>
+					<url>https://maven.pkg.github.com/chibyhq/chiby-ide</url>
+				</repository>
+			</distributionManagement>
+		
 			<repositories>
 				<repository>
 					<id>central</id>
