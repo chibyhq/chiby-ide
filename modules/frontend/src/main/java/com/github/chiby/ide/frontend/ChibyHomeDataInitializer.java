@@ -1,12 +1,14 @@
 package com.github.chiby.ide.frontend;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.UUID;
 import java.util.logging.Level;
 
@@ -56,8 +58,18 @@ public class ChibyHomeDataInitializer implements ApplicationRunner {
 		Path homePath = fileSystem.getPath(frontendConfig.getHome());
 		if( ( (!Files.exists(homePath)) || Files.list(homePath).count() == 0) && frontendConfig.isInitializeHome()){
 			Files.createDirectories(homePath);
-			Files.newDirectoryStream(Paths.get(ClassLoader.getSystemResource("sample-projects").toURI()))
-			.forEach(this::findApplicationDefinition);
+			
+		    String resourceDirectory = "/sample-projects";
+		    URI uri = getClass().getResource(resourceDirectory).toURI();
+		    Path path;
+
+		    if (uri.getScheme().equals("jar")) {
+		      path = FileSystems.newFileSystem(uri, Collections.emptyMap()).getPath("/BOOT-INF/classes" + resourceDirectory);
+			}else {
+			  path = Paths.get(uri);
+			}
+		    
+		    Files.newDirectoryStream(path).forEach(this::findApplicationDefinition);
 			
 			if(serializer != null){
 				serializer.persistAllApplications();
