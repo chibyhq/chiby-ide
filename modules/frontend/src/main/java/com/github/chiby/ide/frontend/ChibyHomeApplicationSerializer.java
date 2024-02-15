@@ -46,9 +46,9 @@ public class ChibyHomeApplicationSerializer {
 		Path appHome = applicationHomeResolver.getPathForApplication(app);
 		if (!Files.exists(appHome)) {
 			try {
-				Files.createDirectory(appHome);
+				Files.createDirectories(appHome);
 			} catch (IOException e) {
-				log.log(Level.SEVERE, "Could not create application home directory for " + app.getTitle(), e);
+				log.log(Level.SEVERE, "Could not create application home directories for " + app.getTitle(), e);
 			}
 		}
 		if (Files.isDirectory(appHome) && Files.isWritable(appHome)) {

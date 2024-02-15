@@ -12,7 +12,7 @@
     <js>webjar:bootstrap.js</js>
     <js>classpath:META-INF/resources/webjars/bootstrap-select/1.12.4/js/bootstrap-select.js</js>
     <js>webjar:packery.pkgd.js</js>
-    <js>classpath:META-INF/resources/webjars/hybind/1.4.3/index.js</js>
+    <js>classpath:META-INF/resources/webjars/hybind/1.7.0/index.js</js>
     <js>/ide/js/chiby-ide.service.js</js>                          
   </group>
 
