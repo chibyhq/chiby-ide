@@ -6,7 +6,7 @@
 
     <groupId>com.github.chibyhq</groupId>
     <artifactId>ide-frontend</artifactId>
-    <version>1.4-github-packages-SNAPSHOT</version>
+    <version>1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Chiby IDE :: frontend</name>
